@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Trắc nghiệm HIV/AIDS — Phòng chống & Tuyên truyền</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+    <style>
+        :root {
+            --red: #e63946;
+            --red-dark: #c1121f;
+            --red-light: #fde8ea;
+            --red-mid: #f4a0a6;
+            --white: #ffffff;
+            --gray-50: #f8f9fa;
+            --gray-100: #f1f3f5;
+            --gray-200: #e9ecef;
+            --gray-400: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+            --green: #2d9d5d;
+            --green-light: #e8f7ef;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --font: 'Be Vietnam Pro', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
+
+        /* ── HEADER RIBBON ── */
+        .app-header {
+            width: 100%;
+            background: var(--white);
+            border-bottom: 3px solid var(--red);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .ribbon-icon {
+            width: 44px;
+            height: 44px;
+            animation: ribbonPulse 2.4s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes ribbonPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .header-text h1 {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--red-dark);
+            line-height: 1.2;
+            letter-spacing: -0.2px;
+        }
+
+        .header-text p {
+            font-size: 11px;
+            color: var(--gray-600);
+            font-weight: 500;
+            margin-top: 1px;
+        }
+
+        /* ── SCREENS ── */
+        .screen {
+            display: none;
+            width: 100%;
+            max-width: 540px;
+            padding: 20px 16px 40px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* ── SCREEN 1: REGISTRATION ── */
+        .reg-hero {
+            width: 100%;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(230, 57, 70, 0.35);
+        }
+
+        .reg-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 50%;
+        }
+
+        .reg-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .reg-hero-ribbon {
+            font-size: 52px;
+            margin-bottom: 8px;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .reg-hero h2 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.4px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 6px;
+        }
+
+        .reg-hero p {
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 13px;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .form-card {
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 7px;
+            letter-spacing: 0.1px;
+        }
+
+        .form-label span {
+            color: var(--red);
+        }
+
+        .form-input {
+            width: 100%;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 13px 14px;
+            font-family: var(--font);
+            font-size: 15px;
+            color: var(--gray-800);
+            background: var(--gray-50);
+            transition: border-color .2s, box-shadow .2s;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.12);
+            background: #fff;
+        }
+
+        /* Searchable Dropdown */
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-search {
+            width: 100%;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 13px 40px 13px 14px;
+            font-family: var(--font);
+            font-size: 15px;
+            color: var(--gray-800);
+            background: var(--gray-50);
+            transition: border-color .2s, box-shadow .2s;
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+
+        .select-search:focus {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.12);
+            background: #fff;
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--gray-400);
+            font-size: 12px;
+        }
+
+        .dropdown-list {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 200;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .dropdown-list.open {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 14px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background .15s;
+            color: var(--gray-800);
+            font-weight: 500;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item.highlighted {
+            background: var(--red-light);
+            color: var(--red-dark);
+        }
+
+        .dropdown-item.selected {
+            background: var(--red-light);
+            color: var(--red-dark);
+            font-weight: 700;
+        }
+
+        .dropdown-empty {
+            padding: 14px;
+            font-size: 13px;
+            color: var(--gray-400);
+            text-align: center;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            letter-spacing: 0.2px;
+            transition: transform .18s, box-shadow .18s, opacity .18s;
+            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.38);
+            margin-top: 6px;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ── SCREEN 2: QUIZ ── */
+        .quiz-topbar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .quiz-progress-label {
+            font-size: 13px;
+            color: var(--gray-600);
+            font-weight: 600;
+        }
+
+        .quiz-timer {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--red-light);
+            color: var(--red-dark);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .timer-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--red);
+            border-radius: 50%;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            background: var(--gray-200);
+            border-radius: 99px;
+            height: 6px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--red-mid), var(--red));
+            border-radius: 99px;
+            transition: width .4s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .question-card {
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 22px 18px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 16px;
+            border-left: 4px solid var(--red);
+        }
+
+        .question-num {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--red);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        .options-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            width: 100%;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-800);
+            cursor: pointer;
+            text-align: left;
+            transition: all .2s;
+            box-shadow: var(--shadow-sm);
+            -webkit-appearance: none;
+        }
+
+        .option-btn:active {
+            transform: scale(0.99);
+        }
+
+        .option-btn.selected {
+            border-color: var(--red);
+            background: var(--red-light);
+            color: var(--red-dark);
+            font-weight: 700;
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
+        }
+
+        .option-key {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            flex-shrink: 0;
+            color: var(--gray-600);
+            transition: all .2s;
+        }
+
+        .option-btn.selected .option-key {
+            background: var(--red);
+            color: #fff;
+        }
+
+        .btn-next {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform .18s, box-shadow .18s, opacity .18s;
+            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.35);
+        }
+
+        .btn-next:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-next:not(:disabled):active {
+            transform: scale(0.98);
+        }
+
+        /* ── SCREEN 3: RESULT ── */
+        .result-card {
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 22px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-trophy {
+            font-size: 64px;
+            margin-bottom: 12px;
+            display: block;
+            animation: pop .5s cubic-bezier(.26, 1.6, .48, 1) both;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .result-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--red-dark);
+            margin-bottom: 6px;
+        }
+
+        .result-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 24px;
+        }
+
+        .result-score-ring {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: conic-gradient(var(--red) var(--pct, 0%), var(--gray-100) 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 24px rgba(230, 57, 70, 0.2);
+            position: relative;
+        }
+
+        .result-score-ring::before {
+            content: '';
+            position: absolute;
+            width: 104px;
+            height: 104px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .result-score-inner {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .result-score-num {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--red);
+            line-height: 1;
+        }
+
+        .result-score-denom {
+            font-size: 14px;
+            color: var(--gray-400);
+            font-weight: 600;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .stat-box {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 14px 12px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+
+        .stat-box-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .stat-box-val {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--gray-800);
+        }
+
+        .stat-box-lbl {
+            font-size: 11px;
+            color: var(--gray-400);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .result-message {
+            width: 100%;
+            background: var(--green-light);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            border-left: 4px solid var(--green);
+            font-size: 14px;
+            color: #1a5c3a;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .result-message strong {
+            color: var(--green);
+        }
+
+        .btn-retry {
+            width: 100%;
+            padding: 16px;
+            background: var(--white);
+            color: var(--red);
+            border: 2px solid var(--red);
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .btn-retry:active {
+            background: var(--red-light);
+        }
+
+        /* ── ANSWER REVIEW ── */
+        .review-card {
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 20px 18px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 12px;
+            border-left: 4px solid var(--gray-200);
+        }
+
+        .review-card.correct {
+            border-left-color: var(--green);
+        }
+
+        .review-card.wrong {
+            border-left-color: var(--red);
+        }
+
+        .review-q {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gray-800);
+        }
+
+        .review-row {
+            font-size: 13px;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .review-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 99px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .review-badge.correct-badge {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .review-badge.wrong-badge {
+            background: var(--red-light);
+            color: var(--red);
+        }
+
+        .review-badge.right-badge {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        /* Misc */
+        .section-title {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin: 24px 0 12px;
+            width: 100%;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--gray-800);
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: 99px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 9999;
+            transition: transform .3s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 400px) {
+            .question-text {
+                font-size: 15px;
+            }
+
+            .option-btn {
+                font-size: 13px;
+                padding: 12px 13px;
+            }
+
+            .result-title {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="app-header">
+        <svg class="ribbon-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="21" fill="#fde8ea" stroke="#e63946" stroke-width="2" />
+            <path
+                d="M22 8 C18 8, 14 11, 14 15 C14 19, 17 21, 20 23 L22 36 L24 23 C27 21, 30 19, 30 15 C30 11, 26 8, 22 8Z"
+                fill="#e63946" opacity=".85" />
+            <path d="M20 23 C17 25, 13 27, 13 31 C13 34, 15.5 36, 18 35 L22 36" fill="#c1121f" opacity=".7" />
+            <path d="M24 23 C27 25, 31 27, 31 31 C31 34, 28.5 36, 26 35 L22 36" fill="#c1121f" opacity=".7" />
+        </svg>
+        <div class="header-text">
+            <h1>Trắc nghiệm HIV/AIDS</h1>
+            <p>Tuyên truyền · Phòng chống · Chống kỳ thị</p>
+        </div>
+    </header>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ── SCREEN 1: ĐĂNG KÝ ── -->
+    <div class="screen active" id="screen-reg">
+        <div class="reg-hero">
+            <span class="reg-hero-ribbon">🎗️</span>
+            <h2>Hiểu để bảo vệ bản thân và cộng đồng</h2>
+            <p>Tham gia trắc nghiệm kiến thức về HIV/AIDS — cùng nhau xây dựng cộng đồng khỏe mạnh, không kỳ thị.</p>
+        </div>
+
+        <div class="form-card">
+            <div class="form-group">
+                <label class="form-label">Họ và tên <span>*</span></label>
+                <input class="form-input" id="reg-name" type="text" placeholder="Nhập họ và tên đầy đủ"
+                    autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Đơn vị / Chi đoàn <span>*</span></label>
+                <div class="select-wrapper">
+                    <input class="select-search" id="unit-search" type="text" placeholder="🔍 Gõ để tìm kiếm đơn vị..."
+                        autocomplete="off" readonly />
+                    <span class="select-arrow">▼</span>
+                    <div class="dropdown-list" id="unit-dropdown"></div>
+                </div>
+                <input type="hidden" id="reg-unit" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Số điện thoại <span>*</span></label>
+                <input class="form-input" id="reg-phone" type="tel" placeholder="Nhập số điện thoại" autocomplete="off"
+                    inputmode="numeric" />
+            </div>
+
+            <button class="btn-primary" id="btn-start" onclick="startQuiz()">
+                🚀 Bắt đầu làm bài
+            </button>
+        </div>
+    </div>
+
+    <!-- ── SCREEN 2: LÀM BÀI ── -->
+    <div class="screen" id="screen-quiz">
+        <div class="quiz-topbar">
+            <span class="quiz-progress-label">Câu <span id="q-current">1</span> / <span id="q-total">12</span></span>
+            <div class="quiz-timer">
+                <div class="timer-dot"></div><span id="timer-display">00:00</span>
+            </div>
+        </div>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="question-card">
+            <div class="question-num" id="q-num-label">CÂU HỎI 1</div>
+            <div class="question-text" id="q-text"></div>
+        </div>
+        <div class="options-list" id="options-list"></div>
+        <button class="btn-next" id="btn-next" onclick="nextQuestion()" disabled>Tiếp theo →</button>
+    </div>
+
+    <!-- ── SCREEN 3: KẾT QUẢ ── -->
+    <div class="screen" id="screen-result">
+        <div class="result-card">
+            <span class="result-trophy" id="result-trophy">🏆</span>
+            <div class="result-title" id="result-title">Xuất sắc!</div>
+            <div class="result-name" id="result-name"></div>
+            <div class="result-score-ring" id="score-ring">
+                <div class="result-score-inner">
+                    <div class="result-score-num" id="score-num">0</div>
+                    <div class="result-score-denom" id="score-denom">/12</div>
+                </div>
+            </div>
+            <div class="result-stats">
+                <div class="stat-box">
+                    <div class="stat-box-icon">⏱️</div>
+                    <div class="stat-box-val" id="res-time">--:--</div>
+                    <div class="stat-box-lbl">Thời gian</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-icon">✅</div>
+                    <div class="stat-box-val" id="res-correct">0</div>
+                    <div class="stat-box-lbl">Câu đúng</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-message" id="result-message"></div>
+        <button class="btn-retry" onclick="resetGame()">🔄 Thi lại</button>
+
+        <div class="section-title">📋 Xem lại đáp án</div>
+        <div id="review-list" style="width:100%"></div>
+    </div>
+
+    <script>
+        // ────────────────────────────────────────────────
+        // ĐƠN VỊ / CHI ĐOÀN
+        // ────────────────────────────────────────────────
+        const UNITS = [
+            'Tổ dân phố Thiện Mỹ',
+            'Tổ dân phố Đồng Thiện',
+            'Tổ dân phố Ngô Thì Nhậm',
+            'Tổ dân phố Nam Thiên',
+            'Tổ dân phố Huyền Trân Công Chúa',
+            'Tổ dân phố Ngô Thì Sỹ',
+            'Tổ dân phố An Bình 1',
+            'Tổ dân phố An Bình 2',
+            'Tổ dân phố Nguyễn Trung Trực 2'
+        ];
+
+
+        // ────────────────────────────────────────────────
+        // BỘ CÂU HỎI (đáp án đúng đã băm SHA-256)
+        // ────────────────────────────────────────────────
+        const QUESTIONS = [
+            {
+                q: "HIV lây truyền qua những con đường nào sau đây?",
+                opts: [
+                    "A. Muỗi đốt, côn trùng cắn, ho, hắt hơi",
+                    "B. Quan hệ tình dục không an toàn, truyền máu nhiễm HIV, từ mẹ sang con",
+                    "C. Dùng chung bát đũa, bắt tay, ôm hôn xã giao",
+                    "D. Dùng chung nhà vệ sinh, bể bơi công cộng"
+                ],
+                hash: "d77c3636e8a6fb9160eeccfe8a15a009a5185f9f35e2cd2bb1f9a4e84245d855"
+            },
+            {
+                q: "Điều nào ĐÚNG về khả năng lây HIV trong cuộc sống hàng ngày?",
+                opts: [
+                    "A. HIV lây qua nước bọt khi trò chuyện",
+                    "B. HIV lây qua nước mắt và mồ hôi",
+                    "C. Không lây qua tiếp xúc thông thường như bắt tay, ôm hôn xã giao, dùng chung nhà vệ sinh",
+                    "D. HIV lây qua không khí trong phòng kín"
+                ],
+                hash: "4437c6256fb998067a5f1a22e84f1d37587046a07ed9d354c4763ccbabc495bd"
+            },
+            {
+                q: "'Thời kỳ cửa sổ' (Window Period) trong xét nghiệm HIV là bao lâu kể từ khi phơi nhiễm?",
+                opts: [
+                    "A. Chỉ 24–48 giờ",
+                    "B. Từ 3 đến 12 tuần (phổ biến nhất là 4–6 tuần)",
+                    "C. Đúng 6 tháng với mọi người",
+                    "D. Từ 1 đến 3 năm"
+                ],
+                hash: "22819db4575fadee9bb08fb295ece7022b48c894cf5e659ec5f4ed6b24832838"
+            },
+            {
+                q: "Loại thuốc nào được dùng để điều trị HIV, giúp người nhiễm sống khỏe mạnh lâu dài?",
+                opts: [
+                    "A. Thuốc ARV (Antiretroviral)",
+                    "B. Thuốc kháng sinh Amoxicillin",
+                    "C. Thuốc Paracetamol liều cao",
+                    "D. Vaccine tiêm phòng HIV"
+                ],
+                hash: "c8425797a39506ee3649c7d1a12d209e30bb4fda6f746e5522772dcca30339c4"
+            },
+            {
+                q: "Điều trị dự phòng sau phơi nhiễm (PEP) cần được bắt đầu trong thời gian nào?",
+                opts: [
+                    "A. Trong vòng 1 tuần sau phơi nhiễm",
+                    "B. Bất cứ lúc nào trong vòng 1 tháng",
+                    "C. Trong vòng 72 giờ sau phơi nhiễm",
+                    "D. Chỉ cần dùng trước khi có triệu chứng"
+                ],
+                hash: "21c89453bc911a944985e06753a6933e634494b954fb21d0ad24b759678af589"
+            },
+            {
+                q: "Khi hệ miễn dịch suy giảm nặng và xuất hiện các bệnh nhiễm trùng cơ hội, người nhiễm HIV đã bước vào giai đoạn nào?",
+                opts: [
+                    "A. Giai đoạn ủ bệnh (không triệu chứng)",
+                    "B. Giai đoạn AIDS",
+                    "C. Giai đoạn phục hồi miễn dịch",
+                    "D. Giai đoạn cấp tính ban đầu"
+                ],
+                hash: "b24b69fa566089dc8206106189987a151307186ff600ba2daf7dba83b657c4f2"
+            },
+            {
+                q: "Ngưỡng CD4 nào cho thấy hệ miễn dịch đã suy giảm nghiêm trọng, cần điều trị khẩn cấp?",
+                opts: [
+                    "A. Dưới 200 tế bào/mm³",
+                    "B. Từ 500–800 tế bào/mm³",
+                    "C. Trên 1000 tế bào/mm³",
+                    "D. Bằng 0 tế bào/mm³"
+                ],
+                hash: "0e33c3fca15e3fe310139a9b1d20808e2781465dfa70a09e0c545ba64d74fe73"
+            },
+            {
+                q: "Chiến lược 'U=U' (Undetectable = Untransmittable) trong phòng chống HIV có nghĩa là gì?",
+                opts: [
+                    "A. Người chưa nhiễm HIV không cần xét nghiệm",
+                    "B. HIV không thể điều trị được hoàn toàn",
+                    "C. Người nhiễm HIV điều trị ARV đạt tải lượng virus không phát hiện được",
+                    "D. Thuốc ARV có thể chữa khỏi HIV hoàn toàn"
+                ],
+                hash: "fcdf643b5d134bdae4116b5f56f13b99ef2d33ded8508b7008dbd78e5f8d0ee7"
+            },
+            {
+                q: "Muỗi đốt người nhiễm HIV rồi đốt người khác có lây truyền HIV không?",
+                opts: [
+                    "A. Có, muỗi là vật trung gian truyền HIV rất nguy hiểm",
+                    "B. Không, HIV không lây qua muỗi đốt",
+                    "C. Chỉ lây nếu muỗi vừa đốt ngay trước đó",
+                    "D. Chỉ lây ở vùng nhiệt đới"
+                ],
+                hash: "5511fc3097aba54071b9edc27ee1cd712b1c1b75f805dbf0cc4eff573d3fa164"
+            },
+            {
+                q: "Người nhiễm HIV được chẩn đoán sớm và tuân thủ điều trị ARV thì cuộc sống như thế nào?",
+                opts: [
+                    "A. Xét nghiệm HIV và điều trị ARV sớm giúp người nhiễm sống khỏe mạnh, tuổi thọ gần như bình thường",
+                    "B. Tuổi thọ sẽ giảm còn khoảng 5 năm sau chẩn đoán",
+                    "C. Thuốc ARV có nhiều tác dụng phụ nguy hiểm nên không nên dùng lâu dài",
+                    "D. Người nhiễm HIV không thể làm việc hay sinh hoạt bình thường"
+                ],
+                hash: "d28e40d2bfac2a2efc31d19107cb65d3077e36126f9849480a69d02c043d5502"
+            },
+            {
+                q: "Thái độ đúng đắn trong cộng đồng đối với người nhiễm HIV là gì?",
+                opts: [
+                    "A. Tránh xa, không tiếp xúc để bảo vệ bản thân",
+                    "B. Chỉ giúp đỡ từ xa, không tiếp xúc trực tiếp",
+                    "C. Mọi người đều được tôn trọng và không bị kỳ thị",
+                    "D. Nên công khai danh tính để cộng đồng biết mà phòng tránh"
+                ],
+                hash: "ce6c5f31db7838c13b392e73efdb770c761dc622367505dc6b262fce5abcffcc"
+            },
+            {
+                q: "Để khử khuẩn dụng cụ, thiết bị nghi ngờ dính máu nhiễm HIV (như dụng cụ y tế), nên dùng gì?",
+                opts: [
+                    "A. Nước nóng trên 100°C trong 5 phút là đủ",
+                    "B. Dung dịch khử khuẩn nồng độ clo 0,5% hoặc cồn 70°",
+                    "C. Xà phòng thông thường và nước sạch",
+                    "D. Dung dịch nước muối sinh lý"
+                ],
+                hash: "aacb58b32b9867647524bb3c6f0dfcad135958fd1a0ec2bae2ab1d96fd3ec2af"
+            }
+        ];
+
+        // ────────────────────────────────────────────────
+        // GOOGLE FORM CONFIG
+        // ────────────────────────────────────────────────
+        const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScPrCGkR7FtREI_Ymg2ThN2QwoypVqzHdsYK3ZPmHLC1Sws1A/formResponse";
+        const FIELDS = {
+            name: "entry.899052835",
+            unit: "entry.1225434839",
+            phone: "entry.1569550883",
+            time: "entry.1446684373",
+            score: "entry.1048225987"
+        };
+
+        // ────────────────────────────────────────────────
+        // STATE
+        // ────────────────────────────────────────────────
+        let player = { name: '', unit: '', phone: '' };
+        let shuffledQ = [];
+        let currentIdx = 0;
+        let selectedOpt = null;
+        let timerSec = 0;
+        let timerInterval = null;
+        let answers = []; // { qIdx, chosen, correct }
+        let selectedUnit = '';
+
+        // ────────────────────────────────────────────────
+        // DROPDOWN UNIT SEARCH
+        // ────────────────────────────────────────────────
+        const unitSearch = document.getElementById('unit-search');
+        const unitDropdown = document.getElementById('unit-dropdown');
+        const unitHidden = document.getElementById('reg-unit');
+        let dropdownOpen = false;
+
+        function renderDropdown(filter = '') {
+            const lower = filter.toLowerCase().trim();
+            const items = lower ? UNITS.filter(u => u.toLowerCase().includes(lower)) : UNITS;
+            if (!items.length) {
+                unitDropdown.innerHTML = '<div class="dropdown-empty">Không tìm thấy đơn vị</div>';
+            } else {
+                unitDropdown.innerHTML = items.map(u =>
+                    `<div class="dropdown-item${u === selectedUnit ? ' selected' : ''}" onclick="selectUnit('${u.replace(/'/g, "&#39;")}')">${u}</div>`
+                ).join('');
+            }
+        }
+
+        function openDropdown() {
+            unitSearch.readOnly = false;
+            if (!dropdownOpen) {
+                dropdownOpen = true;
+                unitDropdown.classList.add('open');
+                renderDropdown(unitSearch.value);
+                unitSearch.select();
+            }
+        }
+
+        function closeDropdown() {
+            dropdownOpen = false;
+            unitDropdown.classList.remove('open');
+            unitSearch.readOnly = true;
+            if (!selectedUnit) unitSearch.value = '';
+        }
+
+        function selectUnit(name) {
+            selectedUnit = name;
+            unitHidden.value = name;
+            unitSearch.value = name;
+            unitSearch.readOnly = true;
+            closeDropdown();
+            validateReg();
+        }
+
+        unitSearch.addEventListener('click', openDropdown);
+        unitSearch.addEventListener('input', () => renderDropdown(unitSearch.value));
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.select-wrapper')) closeDropdown();
+        });
+
+        // ────────────────────────────────────────────────
+        // FORM VALIDATION
+        // ────────────────────────────────────────────────
+        function validateReg() {
+            const n = document.getElementById('reg-name').value.trim();
+            const p = document.getElementById('reg-phone').value.trim();
+            const u = unitHidden.value;
+            const ok = n.length >= 2 && p.length >= 9 && u;
+            document.getElementById('btn-start').disabled = !ok;
+        }
+        document.getElementById('reg-name').addEventListener('input', validateReg);
+        document.getElementById('reg-phone').addEventListener('input', validateReg);
+        validateReg();
+
+        // ────────────────────────────────────────────────
+        // SHUFFLE
+        // ────────────────────────────────────────────────
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // ────────────────────────────────────────────────
+        // START QUIZ
+        // ────────────────────────────────────────────────
+        function startQuiz() {
+            const name = document.getElementById('reg-name').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            const unit = unitHidden.value;
+            if (!name || !phone || !unit) { showToast('Vui lòng điền đầy đủ thông tin!'); return; }
+            if (phone.length < 9) { showToast('Số điện thoại không hợp lệ!'); return; }
+
+            player = { name, unit, phone };
+
+            // Shuffle questions and options
+            shuffledQ = shuffle(QUESTIONS).map(q => ({
+                ...q,
+                shuffledOpts: shuffle(q.opts)
+            }));
+
+            currentIdx = 0;
+            answers = [];
+            timerSec = 0;
+            selectedOpt = null;
+
+            showScreen('screen-quiz');
+            document.getElementById('q-total').textContent = shuffledQ.length;
+            startTimer();
+            renderQuestion();
+        }
+
+        // ────────────────────────────────────────────────
+        // TIMER
+        // ────────────────────────────────────────────────
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timerSec++;
+                document.getElementById('timer-display').textContent = formatTime(timerSec);
+            }, 1000);
+        }
+
+        function formatTime(s) {
+            const m = Math.floor(s / 60).toString().padStart(2, '0');
+            const ss = (s % 60).toString().padStart(2, '0');
+            return `${m}:${ss}`;
+        }
+
+        // ────────────────────────────────────────────────
+        // RENDER QUESTION
+        // ────────────────────────────────────────────────
+        function renderQuestion() {
+            const q = shuffledQ[currentIdx];
+            const total = shuffledQ.length;
+            const keys = ['A', 'B', 'C', 'D'];
+
+            document.getElementById('q-current').textContent = currentIdx + 1;
+            document.getElementById('q-num-label').textContent = `CÂU HỎI ${currentIdx + 1}`;
+            document.getElementById('q-text').textContent = q.q;
+            document.getElementById('progress-fill').style.width = `${((currentIdx) / total) * 100}%`;
+
+            // Button label
+            const btnNext = document.getElementById('btn-next');
+            btnNext.textContent = currentIdx === total - 1 ? '✅ Hoàn thành & Nộp bài' : 'Tiếp theo →';
+            btnNext.disabled = true;
+            selectedOpt = null;
+
+            const list = document.getElementById('options-list');
+            list.innerHTML = q.shuffledOpts.map((opt, i) =>
+                `<button class="option-btn" onclick="selectOption(this,'${escapeQ(opt)}')" data-opt="${escapeQ(opt)}">
+      <span class="option-key">${keys[i]}</span>${opt.substring(3)}
+    </button>`
+            ).join('');
+        }
+
+        function escapeQ(s) { return s.replace(/'/g, "&#39;").replace(/"/g, '&quot;'); }
+
+        function selectOption(el, optText) {
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedOpt = optText;
+            document.getElementById('btn-next').disabled = false;
+        }
+
+        // ────────────────────────────────────────────────
+        // NEXT QUESTION
+        // ────────────────────────────────────────────────
+        function nextQuestion() {
+            if (!selectedOpt) return;
+            const q = shuffledQ[currentIdx];
+            const hashed = sha256(selectedOpt);
+            const isCorrect = hashed === q.hash;
+            answers.push({ q: q.q, chosen: selectedOpt, correct: isCorrect, correctHash: q.hash, allOpts: q.opts });
+
+            currentIdx++;
+            if (currentIdx >= shuffledQ.length) {
+                finishQuiz();
+            } else {
+                renderQuestion();
+            }
+        }
+
+        // ────────────────────────────────────────────────
+        // FINISH
+        // ────────────────────────────────────────────────
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            const total = shuffledQ.length;
+            const correct = answers.filter(a => a.correct).length;
+            const timeStr = formatTime(timerSec);
+            const scoreVal = Math.round((correct / total) * 10); // 0-10
+
+            // Progress
+            document.getElementById('progress-fill').style.width = '100%';
+
+            // Score ring
+            const pct = Math.round((correct / total) * 100);
+            document.getElementById('score-ring').style.setProperty('--pct', pct + '%');
+            document.getElementById('score-num').textContent = correct;
+            document.getElementById('score-denom').textContent = '/' + total;
+
+            // Trophy & title
+            let trophy = '🏆', title = 'Xuất sắc!', msg = '';
+            if (pct === 100) { trophy = '🥇'; title = 'Hoàn hảo! Tuyệt vời!'; }
+            else if (pct >= 80) { trophy = '🏆'; title = 'Rất giỏi!'; }
+            else if (pct >= 60) { trophy = '🎉'; title = 'Khá tốt!'; }
+            else if (pct >= 40) { trophy = '📚'; title = 'Cần ôn luyện thêm!'; }
+            else { trophy = '💪'; title = 'Hãy tiếp tục học hỏi!'; }
+
+            if (pct >= 80) msg = `<strong>Chúc mừng ${player.name}!</strong> Bạn có kiến thức rất tốt về HIV/AIDS. Hãy chia sẻ để bảo vệ sức khỏe cộng đồng!`;
+            else if (pct >= 50) msg = `Cảm ơn <strong>${player.name}</strong> đã tham gia! Hãy tìm hiểu thêm để trang bị kiến thức đầy đủ về HIV/AIDS.`;
+            else msg = `<strong>${player.name}</strong> ơi, đừng nản lòng! Hãy đọc kỹ phần đáp án bên dưới và thử lại nhé. Kiến thức về HIV/AIDS rất quan trọng!`;
+
+            document.getElementById('result-trophy').textContent = trophy;
+            document.getElementById('result-title').textContent = title;
+            document.getElementById('result-name').textContent = player.name + ' · ' + player.unit;
+            document.getElementById('res-time').textContent = timeStr;
+            document.getElementById('res-correct').textContent = `${correct}/${total}`;
+            document.getElementById('result-message').innerHTML = msg;
+
+            // Review
+            buildReview();
+
+            // Submit to Google Form
+            submitForm(scoreVal, timeStr);
+
+            showScreen('screen-result');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ────────────────────────────────────────────────
+        // BUILD REVIEW
+        // ────────────────────────────────────────────────
+        function buildReview() {
+            const list = document.getElementById('review-list');
+            // Find correct answer text from original options by matching hash
+            list.innerHTML = answers.map((a, i) => {
+                const correctText = a.allOpts.find(o => sha256(o) === a.correctHash) || '—';
+                return `<div class="review-card ${a.correct ? 'correct' : 'wrong'}">
+      <div class="review-q">Câu ${i + 1}: ${a.q}</div>
+      <div class="review-row">
+        <span class="review-badge ${a.correct ? 'correct-badge' : 'wrong-badge'}">${a.correct ? '✓ Đúng' : '✗ Sai'}</span>
+        <span>Bạn chọn: ${a.chosen}</span>
+      </div>
+      ${!a.correct ? `<div class="review-row"><span class="review-badge right-badge">✓ Đúng</span><span>${correctText}</span></div>` : ''}
+    </div>`;
+            }).join('');
+        }
+
+        // ────────────────────────────────────────────────
+        // SUBMIT FORM
+        // ────────────────────────────────────────────────
+        function submitForm(score, timeStr) {
+            const data = new FormData();
+            data.append(FIELDS.name, player.name);
+            data.append(FIELDS.unit, player.unit);
+            data.append(FIELDS.phone, player.phone);
+            data.append(FIELDS.time, timeStr);
+            data.append(FIELDS.score, score);
+            fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: data }).catch(() => { });
+        }
+
+        // ────────────────────────────────────────────────
+        // RESET
+        // ────────────────────────────────────────────────
+        function resetGame() {
+            clearInterval(timerInterval);
+            selectedUnit = '';
+            document.getElementById('unit-search').value = '';
+            document.getElementById('unit-search').readOnly = true;
+            document.getElementById('reg-unit').value = '';
+            document.getElementById('reg-name').value = '';
+            document.getElementById('reg-phone').value = '';
+            validateReg();
+            showScreen('screen-reg');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ────────────────────────────────────────────────
+        // UTILS
+        // ────────────────────────────────────────────────
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2800);
+        }
+    </script>
+</body>
+
+</html>
