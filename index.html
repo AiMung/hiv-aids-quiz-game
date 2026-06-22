@@ -3,9 +3,12 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Trắc nghiệm HIV/AIDS — Phòng chống & Tuyên truyền</title>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap"
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#c1121f" />
+    <title>Trắc nghiệm Phòng chống Ma túy & HIV/AIDS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Lexend:wght@600;700;800&display=swap"
         rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
     <style>
@@ -18,17 +21,25 @@
             --gray-50: #f8f9fa;
             --gray-100: #f1f3f5;
             --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
             --gray-400: #adb5bd;
             --gray-600: #6c757d;
             --gray-800: #343a40;
             --green: #2d9d5d;
+            --green-dark: #1a7a45;
             --green-light: #e8f7ef;
+            --amber: #c98a14;
+            --amber-light: #fdf3df;
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
-            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.14);
             --radius: 16px;
             --radius-sm: 10px;
             --font: 'Be Vietnam Pro', sans-serif;
+            --font-display: 'Lexend', 'Be Vietnam Pro', sans-serif;
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --footer-h: 78px;
         }
 
         * {
@@ -36,10 +47,12 @@
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
         }
 
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -47,21 +60,27 @@
             background: var(--gray-50);
             color: var(--gray-800);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 0;
+            overscroll-behavior-y: none;
         }
 
-        /* ── HEADER RIBBON ── */
+        button {
+            touch-action: manipulation;
+        }
+
+        /* ── HEADER ── */
         .app-header {
             width: 100%;
             background: var(--white);
             border-bottom: 3px solid var(--red);
-            padding: 14px 20px;
+            padding: calc(12px + var(--safe-top)) 18px 12px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
@@ -69,9 +88,9 @@
         }
 
         .ribbon-icon {
-            width: 44px;
-            height: 44px;
-            animation: ribbonPulse 2.4s ease-in-out infinite;
+            width: 40px;
+            height: 40px;
+            animation: ribbonPulse 2.6s ease-in-out infinite;
             flex-shrink: 0;
         }
 
@@ -83,16 +102,17 @@
             }
 
             50% {
-                transform: scale(1.08);
+                transform: scale(1.07);
             }
         }
 
         .header-text h1 {
-            font-size: 15px;
+            font-family: var(--font-display);
+            font-size: 14.5px;
             font-weight: 800;
             color: var(--red-dark);
-            line-height: 1.2;
-            letter-spacing: -0.2px;
+            line-height: 1.25;
+            letter-spacing: -0.1px;
         }
 
         .header-text p {
@@ -107,23 +127,28 @@
             display: none;
             width: 100%;
             max-width: 540px;
-            padding: 20px 16px 40px;
+            padding: 20px 16px 32px;
             flex-direction: column;
             align-items: center;
+            flex: 1;
         }
 
         .screen.active {
             display: flex;
         }
 
-        /* ── SCREEN 1: REGISTRATION ── */
+        #screen-quiz {
+            padding-bottom: calc(var(--footer-h) + var(--safe-bottom) + 18px);
+        }
+
+        /* ── REGISTRATION ── */
         .reg-hero {
             width: 100%;
             background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             border-radius: var(--radius);
             padding: 28px 24px;
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             position: relative;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(230, 57, 70, 0.35);
@@ -152,7 +177,7 @@
         }
 
         .reg-hero-ribbon {
-            font-size: 52px;
+            font-size: 50px;
             margin-bottom: 8px;
             display: block;
             position: relative;
@@ -160,17 +185,19 @@
         }
 
         .reg-hero h2 {
+            font-family: var(--font-display);
             color: #fff;
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: -0.4px;
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
             position: relative;
             z-index: 1;
             margin-bottom: 6px;
+            line-height: 1.35;
         }
 
         .reg-hero p {
-            color: rgba(255, 255, 255, 0.82);
+            color: rgba(255, 255, 255, 0.85);
             font-size: 13px;
             position: relative;
             z-index: 1;
@@ -178,16 +205,36 @@
             line-height: 1.6;
         }
 
+        .reg-meta {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 14px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .reg-meta span {
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 11px;
+            border-radius: 99px;
+        }
+
         .form-card {
             width: 100%;
             background: var(--white);
             border-radius: var(--radius);
-            padding: 24px 20px;
+            padding: 22px 18px;
             box-shadow: var(--shadow-md);
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 17px;
+            position: relative;
         }
 
         .form-label {
@@ -223,7 +270,6 @@
             background: #fff;
         }
 
-        /* Searchable Dropdown */
         .select-wrapper {
             position: relative;
         }
@@ -257,6 +303,11 @@
             pointer-events: none;
             color: var(--gray-400);
             font-size: 12px;
+            transition: transform .2s;
+        }
+
+        .select-wrapper.open .select-arrow {
+            transform: translateY(-50%) rotate(180deg);
         }
 
         .dropdown-list {
@@ -267,7 +318,7 @@
             background: #fff;
             border: 1.5px solid var(--gray-200);
             border-radius: var(--radius-sm);
-            max-height: 220px;
+            max-height: 230px;
             overflow-y: auto;
             z-index: 200;
             box-shadow: var(--shadow-lg);
@@ -280,7 +331,7 @@
         }
 
         .dropdown-item {
-            padding: 12px 14px;
+            padding: 13px 14px;
             font-size: 14px;
             cursor: pointer;
             transition: background .15s;
@@ -319,14 +370,14 @@
             color: #fff;
             border: none;
             border-radius: var(--radius-sm);
-            font-family: var(--font);
+            font-family: var(--font-display);
             font-size: 16px;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             letter-spacing: 0.2px;
             transition: transform .18s, box-shadow .18s, opacity .18s;
             box-shadow: 0 4px 16px rgba(230, 57, 70, 0.38);
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         .btn-primary:active {
@@ -340,19 +391,24 @@
             box-shadow: none;
         }
 
-        /* ── SCREEN 2: QUIZ ── */
+        /* ── QUIZ TOPBAR ── */
         .quiz-topbar {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .quiz-progress-label {
             font-size: 13px;
             color: var(--gray-600);
             font-weight: 600;
+        }
+
+        .quiz-progress-label b {
+            color: var(--gray-800);
+            font-weight: 800;
         }
 
         .quiz-timer {
@@ -363,8 +419,9 @@
             color: var(--red-dark);
             padding: 6px 14px;
             border-radius: 30px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
+            font-variant-numeric: tabular-nums;
         }
 
         .timer-dot {
@@ -392,15 +449,15 @@
             background: var(--gray-200);
             border-radius: 99px;
             height: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             overflow: hidden;
         }
 
         .progress-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--red-mid), var(--red));
+            background: linear-gradient(90deg, var(--green), var(--green-dark));
             border-radius: 99px;
-            transition: width .4s cubic-bezier(.4, 0, .2, 1);
+            transition: width .35s cubic-bezier(.4, 0, .2, 1);
         }
 
         .question-card {
@@ -423,10 +480,11 @@
         }
 
         .question-text {
+            font-family: var(--font-display);
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--gray-800);
-            line-height: 1.6;
+            line-height: 1.55;
         }
 
         .options-list {
@@ -434,7 +492,6 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 20px;
         }
 
         .option-btn {
@@ -452,9 +509,10 @@
             color: var(--gray-800);
             cursor: pointer;
             text-align: left;
-            transition: all .2s;
+            transition: border-color .15s, background .15s, box-shadow .15s, transform .1s;
             box-shadow: var(--shadow-sm);
             -webkit-appearance: none;
+            line-height: 1.4;
         }
 
         .option-btn:active {
@@ -481,7 +539,7 @@
             font-weight: 800;
             flex-shrink: 0;
             color: var(--gray-600);
-            transition: all .2s;
+            transition: all .15s;
         }
 
         .option-btn.selected .option-key {
@@ -489,32 +547,327 @@
             color: #fff;
         }
 
-        .btn-next {
+        /* ── FIXED BOTTOM NAV BAR ── */
+        .quiz-footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 150;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: center;
+            padding: 10px 16px calc(10px + var(--safe-bottom));
+        }
+
+        .quiz-footer-inner {
             width: 100%;
-            padding: 16px;
+            max-width: 540px;
+            display: grid;
+            grid-template-columns: 52px 1fr 52px;
+            gap: 10px;
+            align-items: stretch;
+        }
+
+        .footer-arrow-btn {
+            border: 1.5px solid var(--gray-200);
+            background: #fff;
+            border-radius: var(--radius-sm);
+            font-size: 19px;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .footer-arrow-btn:active {
+            background: var(--gray-100);
+            transform: scale(0.96);
+        }
+
+        .footer-arrow-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .footer-nav-pill {
+            border: none;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+            color: #fff;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(230, 57, 70, 0.35);
+            transition: transform .15s;
+        }
+
+        .footer-nav-pill:active {
+            transform: scale(0.98);
+        }
+
+        .footer-nav-pill .pill-count {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 2px 9px;
+            border-radius: 99px;
+            font-size: 12.5px;
+        }
+
+        /* ── NAV SHEET (bottom drawer) ── */
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 20, 22, 0.5);
+            z-index: 300;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s;
+        }
+
+        .nav-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .nav-sheet {
+            position: fixed;
+            left: 50%;
+            bottom: 0;
+            width: 100%;
+            max-width: 540px;
+            background: #fff;
+            border-radius: 22px 22px 0 0;
+            z-index: 301;
+            padding: 16px 18px calc(16px + var(--safe-bottom));
+            box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.25);
+            transform: translate(-50%, 100%);
+            transition: transform .32s cubic-bezier(.32, .72, 0, 1);
+            max-height: 82dvh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-sheet.open {
+            transform: translate(-50%, 0);
+        }
+
+        .nav-sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--gray-300);
+            border-radius: 99px;
+            margin: 0 auto 14px;
+        }
+
+        .nav-sheet-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .nav-sheet-head h3 {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+
+        .nav-sheet-head span {
+            font-size: 12.5px;
+            color: var(--gray-600);
+            font-weight: 600;
+        }
+
+        .nav-legend {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .nav-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            color: var(--gray-600);
+            font-weight: 600;
+        }
+
+        .nav-legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 5px;
+            border: 2px solid var(--gray-300);
+            flex-shrink: 0;
+        }
+
+        .nav-legend-swatch.sw-answered {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+
+        .nav-legend-swatch.sw-current {
+            border-color: var(--red);
+            background: var(--red-light);
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 9px;
+            overflow-y: auto;
+            padding-bottom: 6px;
+            flex: 1;
+        }
+
+        .nav-item {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            border: 2px solid var(--gray-200);
+            background: #fff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .12s;
+        }
+
+        .nav-item:active {
+            transform: scale(0.92);
+        }
+
+        .nav-item.answered {
+            background: var(--green-light);
+            border-color: var(--green);
+            color: var(--green-dark);
+        }
+
+        .nav-item.current {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.18);
+            color: var(--red-dark);
+        }
+
+        .nav-item.current.answered {
+            background: var(--red-light);
+            border-color: var(--red);
+        }
+
+        .nav-sheet-submit {
+            margin-top: 14px;
+            width: 100%;
+            padding: 15px;
             background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             color: #fff;
             border: none;
             border-radius: var(--radius-sm);
-            font-family: var(--font);
-            font-size: 16px;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform .18s, box-shadow .18s, opacity .18s;
-            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.35);
+            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.32);
+            transition: transform .15s;
         }
 
-        .btn-next:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-next:not(:disabled):active {
+        .nav-sheet-submit:active {
             transform: scale(0.98);
         }
 
-        /* ── SCREEN 3: RESULT ── */
+        /* ── CONFIRM MODAL ── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 20, 22, 0.55);
+            z-index: 400;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 360px;
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 26px 22px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            animation: pop .28s cubic-bezier(.26, 1.4, .48, 1) both;
+        }
+
+        .modal-icon {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .modal-box h3 {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 8px;
+        }
+
+        .modal-box p {
+            font-size: 13.5px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 13px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: transform .15s;
+        }
+
+        .modal-btn:active {
+            transform: scale(0.97);
+        }
+
+        .modal-btn.ghost {
+            background: var(--gray-100);
+            color: var(--gray-800);
+        }
+
+        .modal-btn.danger {
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+            color: #fff;
+        }
+
+        /* ── RESULT ── */
         .result-card {
             width: 100%;
             background: var(--white);
@@ -526,7 +879,7 @@
         }
 
         .result-trophy {
-            font-size: 64px;
+            font-size: 60px;
             margin-bottom: 12px;
             display: block;
             animation: pop .5s cubic-bezier(.26, 1.6, .48, 1) both;
@@ -545,22 +898,23 @@
         }
 
         .result-title {
-            font-size: 22px;
-            font-weight: 900;
+            font-family: var(--font-display);
+            font-size: 21px;
+            font-weight: 800;
             color: var(--red-dark);
             margin-bottom: 6px;
         }
 
         .result-name {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--gray-800);
-            margin-bottom: 24px;
+            margin-bottom: 22px;
         }
 
         .result-score-ring {
-            width: 130px;
-            height: 130px;
+            width: 128px;
+            height: 128px;
             border-radius: 50%;
             background: conic-gradient(var(--red) var(--pct, 0%), var(--gray-100) 0%);
             display: flex;
@@ -574,8 +928,8 @@
         .result-score-ring::before {
             content: '';
             position: absolute;
-            width: 104px;
-            height: 104px;
+            width: 102px;
+            height: 102px;
             background: #fff;
             border-radius: 50%;
         }
@@ -587,46 +941,47 @@
         }
 
         .result-score-num {
-            font-size: 30px;
-            font-weight: 900;
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 800;
             color: var(--red);
             line-height: 1;
         }
 
         .result-score-denom {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--gray-400);
             font-weight: 600;
         }
 
         .result-stats {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 10px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 6px;
         }
 
         .stat-box {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
-            padding: 14px 12px;
+            padding: 13px 8px;
             text-align: center;
             border: 1px solid var(--gray-200);
         }
 
         .stat-box-icon {
-            font-size: 22px;
+            font-size: 19px;
             margin-bottom: 4px;
         }
 
         .stat-box-val {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             color: var(--gray-800);
         }
 
         .stat-box-lbl {
-            font-size: 11px;
+            font-size: 10.5px;
             color: var(--gray-400);
             font-weight: 600;
             margin-top: 2px;
@@ -647,7 +1002,7 @@
         }
 
         .result-message strong {
-            color: var(--green);
+            color: var(--green-dark);
         }
 
         .btn-retry {
@@ -657,9 +1012,9 @@
             color: var(--red);
             border: 2px solid var(--red);
             border-radius: var(--radius-sm);
-            font-family: var(--font);
-            font-size: 16px;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
             transition: all .2s;
         }
@@ -668,14 +1023,40 @@
             background: var(--red-light);
         }
 
-        /* ── ANSWER REVIEW ── */
+        .review-filter {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin: 18px 0 12px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
+
+        .review-filter button {
+            flex-shrink: 0;
+            border: 1.5px solid var(--gray-200);
+            background: #fff;
+            color: var(--gray-600);
+            padding: 8px 14px;
+            border-radius: 99px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .review-filter button.active {
+            background: var(--gray-800);
+            color: #fff;
+            border-color: var(--gray-800);
+        }
+
         .review-card {
             width: 100%;
             background: var(--white);
             border-radius: var(--radius);
-            padding: 20px 18px;
+            padding: 18px 16px;
             box-shadow: var(--shadow-sm);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border-left: 4px solid var(--gray-200);
         }
 
@@ -687,89 +1068,173 @@
             border-left-color: var(--red);
         }
 
+        .review-card.empty {
+            border-left-color: var(--amber);
+        }
+
         .review-q {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             margin-bottom: 8px;
             color: var(--gray-800);
+            line-height: 1.5;
         }
 
         .review-row {
-            font-size: 13px;
-            margin-bottom: 3px;
+            font-size: 12.5px;
+            margin-bottom: 4px;
             display: flex;
             align-items: flex-start;
             gap: 6px;
+            line-height: 1.5;
         }
 
         .review-badge {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             padding: 2px 8px;
             border-radius: 99px;
             flex-shrink: 0;
             margin-top: 1px;
+            white-space: nowrap;
         }
 
         .review-badge.correct-badge {
             background: var(--green-light);
-            color: var(--green);
+            color: var(--green-dark);
         }
 
         .review-badge.wrong-badge {
             background: var(--red-light);
-            color: var(--red);
+            color: var(--red-dark);
         }
 
         .review-badge.right-badge {
             background: var(--green-light);
-            color: var(--green);
+            color: var(--green-dark);
         }
 
-        /* Misc */
+        .review-badge.empty-badge {
+            background: var(--amber-light);
+            color: var(--amber);
+        }
+
         .section-title {
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 800;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--gray-400);
-            margin: 24px 0 12px;
+            margin: 22px 0 4px;
             width: 100%;
         }
 
         .toast {
             position: fixed;
-            bottom: 24px;
+            bottom: calc(24px + var(--safe-bottom));
             left: 50%;
             transform: translateX(-50%) translateY(80px);
             background: var(--gray-800);
             color: #fff;
             padding: 12px 22px;
             border-radius: 99px;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 600;
             z-index: 9999;
             transition: transform .3s;
             pointer-events: none;
             white-space: nowrap;
+            max-width: 90vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .toast.show {
             transform: translateX(-50%) translateY(0);
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 380px) {
+            .nav-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .result-stats {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .screen {
+                padding: 12px 12px 24px;
+            }
+
+            .reg-hero {
+                padding: 20px 16px;
+                margin-bottom: 16px;
+            }
+
+            .reg-hero h2 {
+                font-size: 17px;
+            }
+
+            .reg-hero p {
+                font-size: 12px;
+            }
+
+            .form-card {
+                padding: 18px 14px;
+            }
+
+            .question-card {
+                padding: 18px 14px;
+            }
+
             .question-text {
                 font-size: 15px;
             }
 
             .option-btn {
                 font-size: 13px;
-                padding: 12px 13px;
+                padding: 12px 14px;
+                gap: 8px;
+            }
+
+            .option-key {
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+                border-radius: 6px;
+            }
+
+            .result-card {
+                padding: 24px 16px;
             }
 
             .result-title {
                 font-size: 19px;
+            }
+
+            .result-score-ring {
+                width: 108px;
+                height: 108px;
+            }
+
+            .result-score-ring::before {
+                width: 84px;
+                height: 84px;
+            }
+
+            .result-score-num {
+                font-size: 24px;
+            }
+        }
+
+        @media (min-width: 541px) {
+
+            .app-header,
+            .quiz-footer {
+                border-radius: 0;
             }
         }
     </style>
@@ -788,8 +1253,8 @@
             <path d="M24 23 C27 25, 31 27, 31 31 C31 34, 28.5 36, 26 35 L22 36" fill="#c1121f" opacity=".7" />
         </svg>
         <div class="header-text">
-            <h1>Trắc nghiệm HIV/AIDS</h1>
-            <p>Tuyên truyền · Phòng chống · Chống kỳ thị</p>
+            <h1>Trắc nghiệm Phòng, chống Ma túy & HIV/AIDS</h1>
+            <p>Tuyên truyền · Phòng chống tệ nạn xã hội</p>
         </div>
     </header>
 
@@ -801,7 +1266,13 @@
         <div class="reg-hero">
             <span class="reg-hero-ribbon">🎗️</span>
             <h2>Hiểu để bảo vệ bản thân và cộng đồng</h2>
-            <p>Tham gia trắc nghiệm kiến thức về HIV/AIDS — cùng nhau xây dựng cộng đồng khỏe mạnh, không kỳ thị.</p>
+            <p>Hội thi tìm hiểu kiến thức phòng, chống ma túy, HIV/AIDS và các tệ nạn xã hội — cùng nhau xây dựng cộng
+                đồng khỏe mạnh, không kỳ thị.</p>
+            <div class="reg-meta">
+                <span>📋 40 câu hỏi</span>
+
+                <span>⏱️ Không giới hạn giờ</span>
+            </div>
         </div>
 
         <div class="form-card">
@@ -813,8 +1284,8 @@
 
             <div class="form-group">
                 <label class="form-label">Đơn vị / Chi đoàn <span>*</span></label>
-                <div class="select-wrapper">
-                    <input class="select-search" id="unit-search" type="text" placeholder="🔍 Gõ để tìm kiếm đơn vị..."
+                <div class="select-wrapper" id="select-wrapper">
+                    <input class="select-search" id="unit-search" type="text" placeholder="Gõ để tìm kiếm đơn vị..."
                         autocomplete="off" readonly />
                     <span class="select-arrow">▼</span>
                     <div class="dropdown-list" id="unit-dropdown"></div>
@@ -828,16 +1299,14 @@
                     inputmode="numeric" />
             </div>
 
-            <button class="btn-primary" id="btn-start" onclick="startQuiz()">
-                🚀 Bắt đầu làm bài
-            </button>
+            <button class="btn-primary" id="btn-start" onclick="startQuiz()">🚀 Bắt đầu làm bài</button>
         </div>
     </div>
 
     <!-- ── SCREEN 2: LÀM BÀI ── -->
     <div class="screen" id="screen-quiz">
         <div class="quiz-topbar">
-            <span class="quiz-progress-label">Câu <span id="q-current">1</span> / <span id="q-total">12</span></span>
+            <span class="quiz-progress-label">Đã làm <b id="answered-count">0</b>/<b id="q-total">40</b> câu</span>
             <div class="quiz-timer">
                 <div class="timer-dot"></div><span id="timer-display">00:00</span>
             </div>
@@ -846,11 +1315,51 @@
             <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
         </div>
         <div class="question-card">
-            <div class="question-num" id="q-num-label">CÂU HỎI 1</div>
+            <div class="question-num" id="q-num-label">CÂU HỎI 1/40</div>
             <div class="question-text" id="q-text"></div>
         </div>
         <div class="options-list" id="options-list"></div>
-        <button class="btn-next" id="btn-next" onclick="nextQuestion()" disabled>Tiếp theo →</button>
+    </div>
+
+    <!-- BOTTOM NAV BAR (chỉ hiện khi làm bài) -->
+    <div class="quiz-footer" id="quiz-footer" style="display:none;">
+        <div class="quiz-footer-inner">
+            <button class="footer-arrow-btn" id="btn-prev" onclick="prevQuestion()">‹</button>
+            <button class="footer-nav-pill" onclick="openNav()">
+                Danh sách câu hỏi <span class="pill-count" id="pill-count">0/40</span>
+            </button>
+            <button class="footer-arrow-btn" id="btn-next-arrow" onclick="nextQuestion()">›</button>
+        </div>
+    </div>
+
+    <!-- NAV SHEET -->
+    <div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
+    <div class="nav-sheet" id="nav-sheet">
+        <div class="nav-sheet-handle"></div>
+        <div class="nav-sheet-head">
+            <h3>Danh sách câu hỏi</h3>
+            <span id="nav-sheet-sub">0/40 đã làm</span>
+        </div>
+        <div class="nav-legend">
+            <div class="nav-legend-item"><span class="nav-legend-swatch"></span> Chưa làm</div>
+            <div class="nav-legend-item"><span class="nav-legend-swatch sw-answered"></span> Đã làm</div>
+            <div class="nav-legend-item"><span class="nav-legend-swatch sw-current"></span> Đang xem</div>
+        </div>
+        <div class="nav-grid" id="nav-grid"></div>
+        <button class="nav-sheet-submit" onclick="requestSubmit()">Nộp bài</button>
+    </div>
+
+    <!-- CONFIRM MODAL -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon">⚠️</div>
+            <h3 id="modal-title">Bạn còn câu chưa trả lời</h3>
+            <p id="modal-text">Vẫn còn một số câu chưa được trả lời. Bạn có chắc muốn nộp bài không?</p>
+            <div class="modal-actions">
+                <button class="modal-btn ghost" onclick="closeModal()">Tiếp tục làm</button>
+                <button class="modal-btn danger" onclick="confirmSubmit()">Nộp bài ngay</button>
+            </div>
+        </div>
     </div>
 
     <!-- ── SCREEN 3: KẾT QUẢ ── -->
@@ -862,7 +1371,7 @@
             <div class="result-score-ring" id="score-ring">
                 <div class="result-score-inner">
                     <div class="result-score-num" id="score-num">0</div>
-                    <div class="result-score-denom" id="score-denom">/12</div>
+                    <div class="result-score-denom" id="score-denom">/40</div>
                 </div>
             </div>
             <div class="result-stats">
@@ -876,6 +1385,11 @@
                     <div class="stat-box-val" id="res-correct">0</div>
                     <div class="stat-box-lbl">Câu đúng</div>
                 </div>
+                <div class="stat-box">
+                    <div class="stat-box-icon">✏️</div>
+                    <div class="stat-box-val" id="res-empty">0</div>
+                    <div class="stat-box-lbl">Bỏ trống</div>
+                </div>
             </div>
         </div>
 
@@ -883,6 +1397,12 @@
         <button class="btn-retry" onclick="resetGame()">🔄 Thi lại</button>
 
         <div class="section-title">📋 Xem lại đáp án</div>
+        <div class="review-filter">
+            <button class="active" data-f="all" onclick="setReviewFilter('all')">Tất cả</button>
+            <button data-f="wrong" onclick="setReviewFilter('wrong')">Câu sai</button>
+            <button data-f="correct" onclick="setReviewFilter('correct')">Câu đúng</button>
+            <button data-f="empty" onclick="setReviewFilter('empty')">Bỏ trống</button>
+        </div>
         <div id="review-list" style="width:100%"></div>
     </div>
 
@@ -902,131 +1422,50 @@
             'Tổ dân phố Nguyễn Trung Trực 2'
         ];
 
-
         // ────────────────────────────────────────────────
-        // BỘ CÂU HỎI (đáp án đúng đã băm SHA-256)
+        // BỘ CÂU HỎI — 40 câu (đáp án đúng đã băm SHA-256)
         // ────────────────────────────────────────────────
         const QUESTIONS = [
-            {
-                q: "HIV lây truyền qua những con đường nào sau đây?",
-                opts: [
-                    "A. Muỗi đốt, côn trùng cắn, ho, hắt hơi",
-                    "B. Quan hệ tình dục không an toàn, truyền máu nhiễm HIV, từ mẹ sang con",
-                    "C. Dùng chung bát đũa, bắt tay, ôm hôn xã giao",
-                    "D. Dùng chung nhà vệ sinh, bể bơi công cộng"
-                ],
-                hash: "d77c3636e8a6fb9160eeccfe8a15a009a5185f9f35e2cd2bb1f9a4e84245d855"
-            },
-            {
-                q: "Điều nào ĐÚNG về khả năng lây HIV trong cuộc sống hàng ngày?",
-                opts: [
-                    "A. HIV lây qua nước bọt khi trò chuyện",
-                    "B. HIV lây qua nước mắt và mồ hôi",
-                    "C. Không lây qua tiếp xúc thông thường như bắt tay, ôm hôn xã giao, dùng chung nhà vệ sinh",
-                    "D. HIV lây qua không khí trong phòng kín"
-                ],
-                hash: "4437c6256fb998067a5f1a22e84f1d37587046a07ed9d354c4763ccbabc495bd"
-            },
-            {
-                q: "'Thời kỳ cửa sổ' (Window Period) trong xét nghiệm HIV là bao lâu kể từ khi phơi nhiễm?",
-                opts: [
-                    "A. Chỉ 24–48 giờ",
-                    "B. Từ 3 đến 12 tuần (phổ biến nhất là 4–6 tuần)",
-                    "C. Đúng 6 tháng với mọi người",
-                    "D. Từ 1 đến 3 năm"
-                ],
-                hash: "22819db4575fadee9bb08fb295ece7022b48c894cf5e659ec5f4ed6b24832838"
-            },
-            {
-                q: "Loại thuốc nào được dùng để điều trị HIV, giúp người nhiễm sống khỏe mạnh lâu dài?",
-                opts: [
-                    "A. Thuốc ARV (Antiretroviral)",
-                    "B. Thuốc kháng sinh Amoxicillin",
-                    "C. Thuốc Paracetamol liều cao",
-                    "D. Vaccine tiêm phòng HIV"
-                ],
-                hash: "c8425797a39506ee3649c7d1a12d209e30bb4fda6f746e5522772dcca30339c4"
-            },
-            {
-                q: "Điều trị dự phòng sau phơi nhiễm (PEP) cần được bắt đầu trong thời gian nào?",
-                opts: [
-                    "A. Trong vòng 1 tuần sau phơi nhiễm",
-                    "B. Bất cứ lúc nào trong vòng 1 tháng",
-                    "C. Trong vòng 72 giờ sau phơi nhiễm",
-                    "D. Chỉ cần dùng trước khi có triệu chứng"
-                ],
-                hash: "21c89453bc911a944985e06753a6933e634494b954fb21d0ad24b759678af589"
-            },
-            {
-                q: "Khi hệ miễn dịch suy giảm nặng và xuất hiện các bệnh nhiễm trùng cơ hội, người nhiễm HIV đã bước vào giai đoạn nào?",
-                opts: [
-                    "A. Giai đoạn ủ bệnh (không triệu chứng)",
-                    "B. Giai đoạn AIDS",
-                    "C. Giai đoạn phục hồi miễn dịch",
-                    "D. Giai đoạn cấp tính ban đầu"
-                ],
-                hash: "b24b69fa566089dc8206106189987a151307186ff600ba2daf7dba83b657c4f2"
-            },
-            {
-                q: "Ngưỡng CD4 nào cho thấy hệ miễn dịch đã suy giảm nghiêm trọng, cần điều trị khẩn cấp?",
-                opts: [
-                    "A. Dưới 200 tế bào/mm³",
-                    "B. Từ 500–800 tế bào/mm³",
-                    "C. Trên 1000 tế bào/mm³",
-                    "D. Bằng 0 tế bào/mm³"
-                ],
-                hash: "0e33c3fca15e3fe310139a9b1d20808e2781465dfa70a09e0c545ba64d74fe73"
-            },
-            {
-                q: "Chiến lược 'U=U' (Undetectable = Untransmittable) trong phòng chống HIV có nghĩa là gì?",
-                opts: [
-                    "A. Người chưa nhiễm HIV không cần xét nghiệm",
-                    "B. HIV không thể điều trị được hoàn toàn",
-                    "C. Người nhiễm HIV điều trị ARV đạt tải lượng virus không phát hiện được",
-                    "D. Thuốc ARV có thể chữa khỏi HIV hoàn toàn"
-                ],
-                hash: "fcdf643b5d134bdae4116b5f56f13b99ef2d33ded8508b7008dbd78e5f8d0ee7"
-            },
-            {
-                q: "Muỗi đốt người nhiễm HIV rồi đốt người khác có lây truyền HIV không?",
-                opts: [
-                    "A. Có, muỗi là vật trung gian truyền HIV rất nguy hiểm",
-                    "B. Không, HIV không lây qua muỗi đốt",
-                    "C. Chỉ lây nếu muỗi vừa đốt ngay trước đó",
-                    "D. Chỉ lây ở vùng nhiệt đới"
-                ],
-                hash: "5511fc3097aba54071b9edc27ee1cd712b1c1b75f805dbf0cc4eff573d3fa164"
-            },
-            {
-                q: "Người nhiễm HIV được chẩn đoán sớm và tuân thủ điều trị ARV thì cuộc sống như thế nào?",
-                opts: [
-                    "A. Xét nghiệm HIV và điều trị ARV sớm giúp người nhiễm sống khỏe mạnh, tuổi thọ gần như bình thường",
-                    "B. Tuổi thọ sẽ giảm còn khoảng 5 năm sau chẩn đoán",
-                    "C. Thuốc ARV có nhiều tác dụng phụ nguy hiểm nên không nên dùng lâu dài",
-                    "D. Người nhiễm HIV không thể làm việc hay sinh hoạt bình thường"
-                ],
-                hash: "d28e40d2bfac2a2efc31d19107cb65d3077e36126f9849480a69d02c043d5502"
-            },
-            {
-                q: "Thái độ đúng đắn trong cộng đồng đối với người nhiễm HIV là gì?",
-                opts: [
-                    "A. Tránh xa, không tiếp xúc để bảo vệ bản thân",
-                    "B. Chỉ giúp đỡ từ xa, không tiếp xúc trực tiếp",
-                    "C. Mọi người đều được tôn trọng và không bị kỳ thị",
-                    "D. Nên công khai danh tính để cộng đồng biết mà phòng tránh"
-                ],
-                hash: "ce6c5f31db7838c13b392e73efdb770c761dc622367505dc6b262fce5abcffcc"
-            },
-            {
-                q: "Để khử khuẩn dụng cụ, thiết bị nghi ngờ dính máu nhiễm HIV (như dụng cụ y tế), nên dùng gì?",
-                opts: [
-                    "A. Nước nóng trên 100°C trong 5 phút là đủ",
-                    "B. Dung dịch khử khuẩn nồng độ clo 0,5% hoặc cồn 70°",
-                    "C. Xà phòng thông thường và nước sạch",
-                    "D. Dung dịch nước muối sinh lý"
-                ],
-                hash: "aacb58b32b9867647524bb3c6f0dfcad135958fd1a0ec2bae2ab1d96fd3ec2af"
-            }
+            { "q": "Ma túy là gì?", "opts": ["A. Một loại thực phẩm chức năng", "B. Chất gây nghiện làm thay đổi tâm trạng, ý thức và hành vi", "C. Một loại thuốc bổ", "D. Một loại đồ uống"], "hash": "8753bb0cd24a189c0e9268683eca4509d7df13fc223b66adfe63eef32f97d4bb" },
+            { "q": "Đối tượng hiện nay bị ảnh hưởng nhiều bởi ma túy là:", "opts": ["A. Người cao tuổi", "B. Trẻ em dưới 5 tuổi", "C. Thanh niên, học sinh, sinh viên", "D. Công nhân"], "hash": "11a5c94ed4ad0ebae4dd10d4d140067302c388195d225d1cd3b06a9a17913c65" },
+            { "q": "Heroin được tổng hợp từ chất nào?", "opts": ["A. Cần sa", "B. Morphin", "C. Rượu", "D. Nicotin"], "hash": "1ee293a41ef4b86616461101ce9c14bcecfd258c12fcf2c38fe221d64bd2417e" },
+            { "q": "Heroin có thể gây nghiện:", "opts": ["A. Rất chậm", "B. Không gây nghiện", "C. Rất nhanh", "D. Chỉ gây nghiện ở người lớn"], "hash": "65eab80c9400350554994103a0470d425c20750ab5068216eac873e5fd748d9d" },
+            { "q": "Ma túy đá còn có tên gọi là:", "opts": ["A. Ketamine", "B. Methamphetamine", "C. Cocaine", "D. Nicotine"], "hash": "67a1fd3494dba64122759b8db81127c830d458a5fab3ba3712f627b05e9f5845" },
+            { "q": "Ma túy đá tác động mạnh nhất vào:", "opts": ["A. Gan", "B. Tim", "C. Não và hệ thần kinh trung ương", "D. Dạ dày"], "hash": "6ba6d5df595c740d333b2351b05c6f48171968974916d1d4df5af0c41a1034a3" },
+            { "q": "Thuốc lắc còn được gọi là:", "opts": ["A. Ecstasy", "B. Aspirin", "C. Morphin", "D. Penicillin"], "hash": "4b72bea8790342fef2e36e449268b190c9e7bbd233222a805f972f03bf0f5749" },
+            { "q": "Thuốc lắc thuộc nhóm:", "opts": ["A. Thuốc giảm đau", "B. Chất kích thích thần kinh", "C. Vitamin", "D. Thuốc kháng sinh"], "hash": "42a4337b839a9a3ed5635105519739ff46112aa45e081f0bb34eefb9494217cc" },
+            { "q": "Cần sa còn được gọi là:", "opts": ["A. Cỏ, bồ đà", "B. Muối tắm", "C. Trà sữa", "D. Nước vui"], "hash": "c2ddf0a1df993dde31bac626de058033319432cd3e00de1d48c27c2f83cecf10" },
+            { "q": "Người sử dụng cần sa lâu dài có thể:", "opts": ["A. Tăng trí nhớ", "B. Tăng khả năng học tập", "C. Giảm trí nhớ và khả năng tập trung", "D. Không ảnh hưởng gì"], "hash": "75be143e680e476685f0bd687c5c4a3d4305cfca0fb248e15b609c664ecb3a05" },
+            { "q": "Ma túy \"Tem giấy\" được tẩm chất:", "opts": ["A. Nicotine", "B. LSD", "C. Caffeine", "D. Vitamin C"], "hash": "6a5869b2b470b0ce6ad050d482a14a620635eb7526e136c07edf29cf030ba253" },
+            { "q": "Ma túy \"Nước vui\" thường được:", "opts": ["A. Ăn trực tiếp", "B. Trộn với nước ngọt để uống", "C. Tiêm", "D. Đốt để hít"], "hash": "840dc881c80f78e8fc62c61db9b4b1bb16556ef9eb0c7140b22bd2c8e153f3a1" },
+            { "q": "Ma túy \"Trà sữa\" thường có:", "opts": ["A. Mùi cà phê", "B. Mùi sữa", "C. Mùi bạc hà", "D. Không mùi"], "hash": "f4eff1654da03f10b5ccca94cb6c1bd68153ac2964661be17e19938e1fbfafc3" },
+            { "q": "\"Cỏ Mỹ\" gây:", "opts": ["A. Tăng trí thông minh", "B. Loạn thần, mất kiểm soát hành vi", "C. Tăng sức đề kháng", "D. Không có tác hại"], "hash": "9bb97c7414f703a77d65ea2f3411d6e14e3aca6eac2f5807ce0b4347de876bea" },
+            { "q": "Bóng cười sử dụng loại khí:", "opts": ["A. CO₂", "B. O₂", "C. N₂O", "D. H₂"], "hash": "f641e12ec02c8756775661e471036ecc18a30b8480be62c4703e2a71abb3a579" },
+            { "q": "Bóng cười:", "opts": ["A. Hoàn toàn vô hại", "B. Không gây nghiện", "C. Có thể gây ảnh hưởng hệ thần kinh", "D. Là thuốc chữa bệnh"], "hash": "86be3532cba3246eb5a6b9656cda4f2b9f97868708f02147e041edbe9f97ad85" },
+            { "q": "Keo con chó bị lạm dụng để:", "opts": ["A. Tăng sức khỏe", "B. Làm chất kích thích", "C. Chữa bệnh", "D. Làm đẹp"], "hash": "e90704d7e0aa614212ab47e884f3c1d2700bebca5bb7b77b245e4a93f9227369" },
+            { "q": "Ma túy có thể làm gia tăng nguy cơ:", "opts": ["A. Thành công trong học tập", "B. Lây nhiễm HIV/AIDS", "C. Tăng tuổi thọ", "D. Tăng chiều cao"], "hash": "05395f0a0907bed0c2d6a79891c764b892a48d32d5433ac2acd2a5899ee17747" },
+            { "q": "Một trong những hậu quả của ma túy là:", "opts": ["A. Gia đình hạnh phúc hơn", "B. Tăng thu nhập", "C. Gia tăng tội phạm", "D. Tăng khả năng ghi nhớ"], "hash": "a714317d9ba69b5e04b3b881b37e1c5f6a1137fbf1a989bf575e429d2c8303a9" },
+            { "q": "Người nghiện ma túy thường:", "opts": ["A. Tinh thần ổn định", "B. Học tập tốt hơn", "C. Suy giảm sức khỏe thể chất và tinh thần", "D. Không thay đổi gì"], "hash": "407aa4aa2d25eb263c05febf7db9db95389c5bea08f79313009398505dd35ac6" },
+            { "q": "Dùng ma túy liều cao có thể:", "opts": ["A. Ngủ ngon", "B. Hôn mê, tử vong", "C. Tăng trí nhớ", "D. Tăng sức khỏe"], "hash": "4943b5ea236a53d639638c346b409338038b2fa6a010a21d49637a3df14447bf" },
+            { "q": "Một dấu hiệu nhận biết người sử dụng ma túy là:", "opts": ["A. Sinh hoạt điều độ", "B. Ngủ sớm", "C. Thức khuya, ngày ngủ nhiều", "D. Học tập tiến bộ"], "hash": "3838fda6a31191c19df25bfa482753475103074c6bf8830ef0a455330cb237a9" },
+            { "q": "Người nghiện ma túy thường:", "opts": ["A. Tăng cân", "B. Sụt cân, xanh xao", "C. Không thay đổi", "D. Cao lớn hơn"], "hash": "dfba7fecb559562263e907093d907974a33a4279a3c28a6af2d6beb73e19be20" },
+            { "q": "Học sinh sử dụng ma túy thường:", "opts": ["A. Học tập tiến bộ", "B. Đi học đều", "C. Bỏ học, học lực giảm sút", "D. Được khen thưởng"], "hash": "93e82838549c59c45e1b1f3bc52c1edcde447ae4b4fdf4c50c921f219258cb28" },
+            { "q": "Quá trình dẫn đến nghiện ma túy thường bắt đầu từ:", "opts": ["A. Lao động", "B. Tò mò, dùng thử", "C. Học tập", "D. Thể thao"], "hash": "0613f334ec4b371ad5314465b896bc729c336b6c61c2bb27267bc5b66a0882ca" },
+            { "q": "Học sinh cần:", "opts": ["A. Thử ma túy một lần cho biết", "B. Tuyệt đối không thử ma túy", "C. Chỉ dùng khi được rủ rê", "D. Dùng ma túy để giải trí"], "hash": "15be61cb6bd6e20732d7183ca37e5084de3abfb313a453a96dc9324c84233fe5" },
+            { "q": "Khi phát hiện người có liên quan đến ma túy cần:", "opts": ["A. Im lặng", "B. Che giấu", "C. Báo cho cha mẹ hoặc thầy cô", "D. Làm ngơ"], "hash": "063eae3005a35c244fe27eabaf57a323df7a3e8e2a02e3f9a7e522b1d8f6111b" },
+            { "q": "Học sinh nên:", "opts": ["A. Kết bạn với người nghiện", "B. Tránh xa bạn xấu liên quan đến ma túy", "C. Thử sử dụng cho biết", "D. Giấu gia đình"], "hash": "8fe17576ad9b96008b99a4ac400a32ee3004766aca5ae2c8d9f37510e5f30874" },
+            { "q": "Hành vi nào sau đây là vi phạm pháp luật?", "opts": ["A. Tuyên truyền phòng chống ma túy", "B. Học tập tốt", "C. Mua bán trái phép chất ma túy", "D. Tập thể dục"], "hash": "04b883201e0b45722801f52beafc23818667ee85a38b94cfd5fa0e88839ca549" },
+            { "q": "Ma túy ảnh hưởng đến:", "opts": ["A. Sức khỏe", "B. Tinh thần", "C. Gia đình và xã hội", "D. Tất cả các ý trên"], "hash": "c67cb42f2dba881f41e5a2560497e357af9658b05a68913c643743824037c918" },
+            { "q": "HIV là viết tắt của:", "opts": ["A. Một loại thuốc", "B. Vi rút gây suy giảm miễn dịch ở người", "C. Một loại vắc xin", "D. Một bệnh về gan"], "hash": "917ea62cc24fa3949d88e41cf80bded19d67e99cb3692346afd087afd8197677" },
+            { "q": "HIV tấn công chủ yếu vào:", "opts": ["A. Hệ tiêu hóa", "B. Hệ miễn dịch", "C. Hệ xương", "D. Hệ hô hấp"], "hash": "d245f5afacbed9a2259c0adbab994fa4e4090ea1e2abcc58f165ad0fae9fdb67" },
+            { "q": "AIDS là:", "opts": ["A. Giai đoạn cuối của nhiễm HIV", "B. Một loại vi khuẩn", "C. Một loại thuốc", "D. Bệnh tim"], "hash": "b9a7b904e5b510d4b12df37fecbe0224bde6e6985a400ed0370ab211ccb53eb9" },
+            { "q": "HIV có thể lây qua:", "opts": ["A. Dùng chung bơm kim tiêm", "B. Bắt tay", "C. Ăn chung", "D. Nói chuyện"], "hash": "bd8d775f3d9e4ed2176e7b7577191e2aa5c6a71ed6202809381aaa6e7fac06ec" },
+            { "q": "HIV không lây qua:", "opts": ["A. Muỗi đốt", "B. Quan hệ tình dục không an toàn", "C. Máu", "D. Dùng chung kim tiêm"], "hash": "7f316cb766bfe3980f22baf1040b8124fac143ec5ba0bf482b32c788c77ba85b" },
+            { "q": "Để phòng tránh HIV, học sinh cần:", "opts": ["A. Không dùng chung kim tiêm", "B. Tránh xa ma túy", "C. Có lối sống lành mạnh", "D. Tất cả các ý trên"], "hash": "c67cb42f2dba881f41e5a2560497e357af9658b05a68913c643743824037c918" },
+            { "q": "Học sinh cần làm gì để phòng chống ma túy?", "opts": ["A. Chăm chỉ học tập", "B. Có lối sống lành mạnh", "C. Không thử ma túy", "D. Tất cả các ý trên"], "hash": "c67cb42f2dba881f41e5a2560497e357af9658b05a68913c643743824037c918" },
+            { "q": "Tuyên truyền phòng chống ma túy là trách nhiệm của:", "opts": ["A. Công an", "B. Nhà trường", "C. Gia đình", "D. Tất cả mọi người"], "hash": "eca97910f6d98ea3acf4261e4175b5953d50e4c48cb12510b3e88234414ff49b" },
+            { "q": "Khẩu hiệu phù hợp nhất là:", "opts": ["A. Sống thử với ma túy", "B. Ma túy là bạn", "C. Nói không với ma túy", "D. Ma túy không nguy hiểm"], "hash": "bf954fc3156d4a570263ac54c98bcec344b2e82b3b3fad613c962d28a501fc40" },
+            { "q": "Vì một xã hội tươi đẹp, chúng ta cần:", "opts": ["A. Thờ ơ với ma túy", "B. Che giấu người nghiện", "C. Chung tay phòng chống ma túy", "D. Tránh tuyên truyền"], "hash": "b764a585bbce7b135725e1d63878934e4c03be510035aa4625e41ae5bdfdd63c" }
         ];
 
         // ────────────────────────────────────────────────
@@ -1047,18 +1486,21 @@
         let player = { name: '', unit: '', phone: '' };
         let shuffledQ = [];
         let currentIdx = 0;
-        let selectedOpt = null;
+        let answers = [];           // mảng cùng độ dài shuffledQ: null hoặc { chosen }
         let timerSec = 0;
         let timerInterval = null;
-        let answers = []; // { qIdx, chosen, correct }
         let selectedUnit = '';
+        let reviewFilter = 'all';
+        let lastReviewData = [];
+        let autoAdvanceTimer = null;
 
         // ────────────────────────────────────────────────
-        // DROPDOWN UNIT SEARCH
+        // DROPDOWN ĐƠN VỊ
         // ────────────────────────────────────────────────
         const unitSearch = document.getElementById('unit-search');
         const unitDropdown = document.getElementById('unit-dropdown');
         const unitHidden = document.getElementById('reg-unit');
+        const selectWrapper = document.getElementById('select-wrapper');
         let dropdownOpen = false;
 
         function renderDropdown(filter = '') {
@@ -1075,6 +1517,7 @@
 
         function openDropdown() {
             unitSearch.readOnly = false;
+            selectWrapper.classList.add('open');
             if (!dropdownOpen) {
                 dropdownOpen = true;
                 unitDropdown.classList.add('open');
@@ -1086,6 +1529,7 @@
         function closeDropdown() {
             dropdownOpen = false;
             unitDropdown.classList.remove('open');
+            selectWrapper.classList.remove('open');
             unitSearch.readOnly = true;
             if (!selectedUnit) unitSearch.value = '';
         }
@@ -1106,7 +1550,7 @@
         });
 
         // ────────────────────────────────────────────────
-        // FORM VALIDATION
+        // VALIDATE FORM
         // ────────────────────────────────────────────────
         function validateReg() {
             const n = document.getElementById('reg-name').value.trim();
@@ -1143,19 +1587,17 @@
 
             player = { name, unit, phone };
 
-            // Shuffle questions and options
-            shuffledQ = shuffle(QUESTIONS).map(q => ({
-                ...q,
-                shuffledOpts: shuffle(q.opts)
-            }));
-
+            shuffledQ = shuffle(QUESTIONS).map(q => ({ ...q, shuffledOpts: shuffle(q.opts) }));
+            answers = new Array(shuffledQ.length).fill(null);
             currentIdx = 0;
-            answers = [];
             timerSec = 0;
-            selectedOpt = null;
+            clearTimeout(autoAdvanceTimer);
+
+            document.getElementById('q-total').textContent = shuffledQ.length;
+            document.getElementById('score-denom').textContent = '/' + shuffledQ.length;
+            document.getElementById('quiz-footer').style.display = 'flex';
 
             showScreen('screen-quiz');
-            document.getElementById('q-total').textContent = shuffledQ.length;
             startTimer();
             renderQuestion();
         }
@@ -1184,73 +1626,163 @@
             const q = shuffledQ[currentIdx];
             const total = shuffledQ.length;
             const keys = ['A', 'B', 'C', 'D'];
+            const answeredCount = answers.filter(a => a).length;
 
-            document.getElementById('q-current').textContent = currentIdx + 1;
-            document.getElementById('q-num-label').textContent = `CÂU HỎI ${currentIdx + 1}`;
+            document.getElementById('q-num-label').textContent = `CÂU HỎI ${currentIdx + 1}/${total}`;
             document.getElementById('q-text').textContent = q.q;
-            document.getElementById('progress-fill').style.width = `${((currentIdx) / total) * 100}%`;
+            document.getElementById('answered-count').textContent = answeredCount;
+            document.getElementById('pill-count').textContent = `${answeredCount}/${total}`;
+            document.getElementById('progress-fill').style.width = `${(answeredCount / total) * 100}%`;
 
-            // Button label
-            const btnNext = document.getElementById('btn-next');
-            btnNext.textContent = currentIdx === total - 1 ? '✅ Hoàn thành & Nộp bài' : 'Tiếp theo →';
-            btnNext.disabled = true;
-            selectedOpt = null;
+            document.getElementById('btn-prev').disabled = currentIdx === 0;
+            document.getElementById('btn-next-arrow').textContent = currentIdx === total - 1 ? '✓' : '›';
 
+            const chosen = answers[currentIdx] ? answers[currentIdx].chosen : null;
             const list = document.getElementById('options-list');
-            list.innerHTML = q.shuffledOpts.map((opt, i) =>
-                `<button class="option-btn" onclick="selectOption(this,'${escapeQ(opt)}')" data-opt="${escapeQ(opt)}">
-      <span class="option-key">${keys[i]}</span>${opt.substring(3)}
-    </button>`
-            ).join('');
+            list.innerHTML = q.shuffledOpts.map((opt, i) => {
+                const isSel = opt === chosen;
+                return `<button class="option-btn${isSel ? ' selected' : ''}" onclick="selectOption(this,'${escapeQ(opt)}')" data-opt="${escapeQ(opt)}">
+          <span class="option-key">${keys[i]}</span>${opt.substring(3)}
+        </button>`;
+            }).join('');
+
+            window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
         }
 
         function escapeQ(s) { return s.replace(/'/g, "&#39;").replace(/"/g, '&quot;'); }
 
         function selectOption(el, optText) {
+            const wasAnswered = !!answers[currentIdx];
+            const answeredIdx = currentIdx;
+
             document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
-            selectedOpt = optText;
-            document.getElementById('btn-next').disabled = false;
+            answers[currentIdx] = { chosen: optText };
+
+            const answeredCount = answers.filter(a => a).length;
+            const total = shuffledQ.length;
+            document.getElementById('answered-count').textContent = answeredCount;
+            document.getElementById('pill-count').textContent = `${answeredCount}/${total}`;
+            document.getElementById('progress-fill').style.width = `${(answeredCount / total) * 100}%`;
+
+            // Tự động chuyển câu kế tiếp khi vừa trả lời lần đầu (không áp dụng khi quay lại sửa đáp án)
+            if (!wasAnswered) {
+                clearTimeout(autoAdvanceTimer);
+                autoAdvanceTimer = setTimeout(() => {
+                    if (currentIdx !== answeredIdx) return; // người dùng đã tự chuyển câu trong lúc chờ
+                    if (currentIdx >= shuffledQ.length - 1) {
+                        requestSubmit();
+                    } else {
+                        currentIdx++;
+                        renderQuestion();
+                    }
+                }, 420);
+            }
         }
 
         // ────────────────────────────────────────────────
-        // NEXT QUESTION
+        // PREV / NEXT
         // ────────────────────────────────────────────────
-        function nextQuestion() {
-            if (!selectedOpt) return;
-            const q = shuffledQ[currentIdx];
-            const hashed = sha256(selectedOpt);
-            const isCorrect = hashed === q.hash;
-            answers.push({ q: q.q, chosen: selectedOpt, correct: isCorrect, correctHash: q.hash, allOpts: q.opts });
+        function prevQuestion() {
+            clearTimeout(autoAdvanceTimer);
+            if (currentIdx === 0) return;
+            currentIdx--;
+            renderQuestion();
+        }
 
+        function nextQuestion() {
+            clearTimeout(autoAdvanceTimer);
+            if (currentIdx >= shuffledQ.length - 1) { requestSubmit(); return; }
             currentIdx++;
-            if (currentIdx >= shuffledQ.length) {
+            renderQuestion();
+        }
+
+        function goToQuestion(idx) {
+            clearTimeout(autoAdvanceTimer);
+            currentIdx = idx;
+            renderQuestion();
+            closeNav();
+        }
+
+        // ────────────────────────────────────────────────
+        // NAV SHEET
+        // ────────────────────────────────────────────────
+        function buildNavGrid() {
+            const grid = document.getElementById('nav-grid');
+            grid.innerHTML = shuffledQ.map((_, i) => {
+                let cls = 'nav-item';
+                if (i === currentIdx) cls += ' current';
+                if (answers[i]) cls += ' answered';
+                return `<button class="${cls}" onclick="goToQuestion(${i})">${i + 1}</button>`;
+            }).join('');
+            const answeredCount = answers.filter(a => a).length;
+            document.getElementById('nav-sheet-sub').textContent = `${answeredCount}/${shuffledQ.length} đã làm`;
+        }
+
+        function openNav() {
+            clearTimeout(autoAdvanceTimer);
+            buildNavGrid();
+            document.getElementById('nav-overlay').classList.add('open');
+            document.getElementById('nav-sheet').classList.add('open');
+        }
+
+        function closeNav() {
+            document.getElementById('nav-overlay').classList.remove('open');
+            document.getElementById('nav-sheet').classList.remove('open');
+        }
+
+        // ────────────────────────────────────────────────
+        // SUBMIT FLOW
+        // ────────────────────────────────────────────────
+        function requestSubmit() {
+            const unanswered = answers.filter(a => !a).length;
+            if (unanswered === 0) {
                 finishQuiz();
-            } else {
-                renderQuestion();
+                return;
             }
+            document.getElementById('modal-title').textContent = `Còn ${unanswered} câu chưa trả lời`;
+            document.getElementById('modal-text').textContent = `Bạn vẫn còn ${unanswered} câu chưa chọn đáp án. Những câu này sẽ được tính là sai. Bạn có chắc muốn nộp bài không?`;
+            document.getElementById('modal-overlay').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('open');
+        }
+
+        function confirmSubmit() {
+            closeModal();
+            finishQuiz();
         }
 
         // ────────────────────────────────────────────────
         // FINISH
         // ────────────────────────────────────────────────
         function finishQuiz() {
+            clearTimeout(autoAdvanceTimer);
             clearInterval(timerInterval);
+            closeNav();
             const total = shuffledQ.length;
-            const correct = answers.filter(a => a.correct).length;
+
+            lastReviewData = shuffledQ.map((q, i) => {
+                const a = answers[i];
+                const correctText = q.opts.find(o => sha256(o) === q.hash) || '—';
+                const isEmpty = !a;
+                const isCorrect = a ? sha256(a.chosen) === q.hash : false;
+                return { q: q.q, chosen: a ? a.chosen : null, correct: isCorrect, empty: isEmpty, correctText };
+            });
+
+            const correct = lastReviewData.filter(r => r.correct).length;
+            const empty = lastReviewData.filter(r => r.empty).length;
             const timeStr = formatTime(timerSec);
-            const scoreVal = Math.round((correct / total) * 10); // 0-10
+            const scoreVal = Math.round((correct / total) * 10);
 
-            // Progress
-            document.getElementById('progress-fill').style.width = '100%';
+            document.getElementById('quiz-footer').style.display = 'none';
 
-            // Score ring
             const pct = Math.round((correct / total) * 100);
             document.getElementById('score-ring').style.setProperty('--pct', pct + '%');
             document.getElementById('score-num').textContent = correct;
             document.getElementById('score-denom').textContent = '/' + total;
 
-            // Trophy & title
             let trophy = '🏆', title = 'Xuất sắc!', msg = '';
             if (pct === 100) { trophy = '🥇'; title = 'Hoàn hảo! Tuyệt vời!'; }
             else if (pct >= 80) { trophy = '🏆'; title = 'Rất giỏi!'; }
@@ -1258,21 +1790,22 @@
             else if (pct >= 40) { trophy = '📚'; title = 'Cần ôn luyện thêm!'; }
             else { trophy = '💪'; title = 'Hãy tiếp tục học hỏi!'; }
 
-            if (pct >= 80) msg = `<strong>Chúc mừng ${player.name}!</strong> Bạn có kiến thức rất tốt về HIV/AIDS. Hãy chia sẻ để bảo vệ sức khỏe cộng đồng!`;
-            else if (pct >= 50) msg = `Cảm ơn <strong>${player.name}</strong> đã tham gia! Hãy tìm hiểu thêm để trang bị kiến thức đầy đủ về HIV/AIDS.`;
-            else msg = `<strong>${player.name}</strong> ơi, đừng nản lòng! Hãy đọc kỹ phần đáp án bên dưới và thử lại nhé. Kiến thức về HIV/AIDS rất quan trọng!`;
+            if (pct >= 80) msg = `<strong>Chúc mừng ${player.name}!</strong> Bạn có kiến thức rất tốt về phòng, chống ma túy và HIV/AIDS. Hãy chia sẻ để bảo vệ sức khỏe cộng đồng!`;
+            else if (pct >= 50) msg = `Cảm ơn <strong>${player.name}</strong> đã tham gia! Hãy tìm hiểu thêm để trang bị kiến thức đầy đủ hơn.`;
+            else msg = `<strong>${player.name}</strong> ơi, đừng nản lòng! Hãy đọc kỹ phần đáp án bên dưới và thử lại nhé. Kiến thức này rất quan trọng với bạn và cộng đồng.`;
 
             document.getElementById('result-trophy').textContent = trophy;
             document.getElementById('result-title').textContent = title;
             document.getElementById('result-name').textContent = player.name + ' · ' + player.unit;
             document.getElementById('res-time').textContent = timeStr;
             document.getElementById('res-correct').textContent = `${correct}/${total}`;
+            document.getElementById('res-empty').textContent = empty;
             document.getElementById('result-message').innerHTML = msg;
 
-            // Review
-            buildReview();
+            reviewFilter = 'all';
+            document.querySelectorAll('.review-filter button').forEach(b => b.classList.toggle('active', b.dataset.f === 'all'));
+            renderReview();
 
-            // Submit to Google Form
             submitForm(scoreVal, timeStr);
 
             showScreen('screen-result');
@@ -1280,26 +1813,48 @@
         }
 
         // ────────────────────────────────────────────────
-        // BUILD REVIEW
+        // REVIEW
         // ────────────────────────────────────────────────
-        function buildReview() {
+        function setReviewFilter(f) {
+            reviewFilter = f;
+            document.querySelectorAll('.review-filter button').forEach(b => b.classList.toggle('active', b.dataset.f === f));
+            renderReview();
+        }
+
+        function renderReview() {
             const list = document.getElementById('review-list');
-            // Find correct answer text from original options by matching hash
-            list.innerHTML = answers.map((a, i) => {
-                const correctText = a.allOpts.find(o => sha256(o) === a.correctHash) || '—';
-                return `<div class="review-card ${a.correct ? 'correct' : 'wrong'}">
-      <div class="review-q">Câu ${i + 1}: ${a.q}</div>
-      <div class="review-row">
-        <span class="review-badge ${a.correct ? 'correct-badge' : 'wrong-badge'}">${a.correct ? '✓ Đúng' : '✗ Sai'}</span>
-        <span>Bạn chọn: ${a.chosen}</span>
-      </div>
-      ${!a.correct ? `<div class="review-row"><span class="review-badge right-badge">✓ Đúng</span><span>${correctText}</span></div>` : ''}
-    </div>`;
+            const filtered = lastReviewData.filter((r, i) => {
+                if (reviewFilter === 'all') return true;
+                if (reviewFilter === 'wrong') return !r.correct && !r.empty;
+                if (reviewFilter === 'correct') return r.correct;
+                if (reviewFilter === 'empty') return r.empty;
+                return true;
+            });
+
+            if (!filtered.length) {
+                list.innerHTML = `<div class="review-card"><div class="review-q">Không có câu nào ở mục này 🎉</div></div>`;
+                return;
+            }
+
+            list.innerHTML = lastReviewData.map((r, i) => {
+                if (reviewFilter === 'wrong' && (r.correct || r.empty)) return '';
+                if (reviewFilter === 'correct' && !r.correct) return '';
+                if (reviewFilter === 'empty' && !r.empty) return '';
+
+                let cardCls = r.empty ? 'empty' : (r.correct ? 'correct' : 'wrong');
+                let badge = r.empty ? `<span class="review-badge empty-badge">✎ Bỏ trống</span>` :
+                    (r.correct ? `<span class="review-badge correct-badge">✓ Đúng</span>` : `<span class="review-badge wrong-badge">✗ Sai</span>`);
+
+                return `<div class="review-card ${cardCls}">
+          <div class="review-q">Câu ${i + 1}: ${r.q}</div>
+          <div class="review-row">${badge}<span>${r.empty ? 'Bạn chưa chọn đáp án' : 'Bạn chọn: ' + r.chosen}</span></div>
+          ${(!r.correct) ? `<div class="review-row"><span class="review-badge right-badge">✓ Đúng</span><span>${r.correctText}</span></div>` : ''}
+        </div>`;
             }).join('');
         }
 
         // ────────────────────────────────────────────────
-        // SUBMIT FORM
+        // SUBMIT TO GOOGLE FORM
         // ────────────────────────────────────────────────
         function submitForm(score, timeStr) {
             const data = new FormData();
