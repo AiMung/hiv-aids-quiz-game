@@ -13,9 +13,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
     <style>
         :root {
-            --red: #e63946;
-            --red-dark: #c1121f;
-            --red-light: #fde8ea;
+            --red: #10b981;
+            /* Mint primary */
+            --red-dark: #047857;
+            /* Mint dark */
+            --red-bright: #34d399;
             --red-mid: #f4a0a6;
             --white: #ffffff;
             --gray-50: #f8f9fa;
@@ -719,7 +721,7 @@
         }
 
         .nav-legend-swatch.sw-current {
-            border-color: var(--red);
+            border-color: orange;
             background: var(--red-light);
         }
 
@@ -759,7 +761,7 @@
         }
 
         .nav-item.current {
-            border-color: var(--red);
+            border-color: orange;
             box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.18);
             color: var(--red-dark);
         }
@@ -1045,7 +1047,7 @@
         }
 
         .review-filter button.active {
-            background: var(--gray-800);
+            background: var(--red-dark);
             color: #fff;
             border-color: var(--gray-800);
         }
@@ -1237,6 +1239,73 @@
                 border-radius: 0;
             }
         }
+
+        /* ── FLAG RAIN EFFECT (hiệu ứng rung lắc) ── */
+        .flag-rain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+
+        .flag-rain-overlay.active {
+            opacity: 1;
+        }
+
+        .flag-piece {
+            position: absolute;
+            top: -60px;
+            width: 36px;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .25));
+            animation: flagFall linear forwards;
+        }
+
+        @keyframes flagFall {
+            to {
+                transform: translateY(115vh) rotate(360deg);
+            }
+        }
+
+        /* ── SHAKE ONBOARDING TOAST ── */
+        .shake-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translate(-50%, 130%);
+            z-index: 100000;
+            background: #0f172a;
+            color: #fff;
+            padding: 14px 16px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12.5px;
+            font-weight: 600;
+            max-width: 92vw;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+            transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .shake-toast.show {
+            transform: translate(-50%, 0);
+        }
+
+        .shake-toast button {
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 11.5px;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -1244,17 +1313,10 @@
 
     <!-- HEADER -->
     <header class="app-header">
-        <svg class="ribbon-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="22" cy="22" r="21" fill="#fde8ea" stroke="#e63946" stroke-width="2" />
-            <path
-                d="M22 8 C18 8, 14 11, 14 15 C14 19, 17 21, 20 23 L22 36 L24 23 C27 21, 30 19, 30 15 C30 11, 26 8, 22 8Z"
-                fill="#e63946" opacity=".85" />
-            <path d="M20 23 C17 25, 13 27, 13 31 C13 34, 15.5 36, 18 35 L22 36" fill="#c1121f" opacity=".7" />
-            <path d="M24 23 C27 25, 31 27, 31 31 C31 34, 28.5 36, 26 35 L22 36" fill="#c1121f" opacity=".7" />
-        </svg>
+        <img src="/image/hiv_icon.png" alt="" style="width: 50px; height: 50px;">
         <div class="header-text">
-            <h1>Trắc nghiệm Phòng, chống Ma túy & HIV/AIDS</h1>
-            <p>Tuyên truyền · Phòng chống tệ nạn xã hội</p>
+            <h1>Trắc nghiệm Kiến thức về HIV/AIDS</h1>
+            <p>Chung tay đẩy lùi đại dịch · Không kỳ thị, không phân biệt</p>
         </div>
     </header>
 
@@ -1300,6 +1362,8 @@
             </div>
 
             <button class="btn-primary" id="btn-start" onclick="startQuiz()">🚀 Bắt đầu làm bài</button>
+            <button class="btn-primary" onclick="location.href='/index.html'">👈 Quay lại trang chủ</button>
+
         </div>
     </div>
 
@@ -1404,6 +1468,14 @@
             <button data-f="empty" onclick="setReviewFilter('empty')">Bỏ trống</button>
         </div>
         <div id="review-list" style="width:100%"></div>
+    </div>
+    <!-- FLAG RAIN OVERLAY -->
+    <div class="flag-rain-overlay" id="flagRainOverlay"></div>
+
+    <!-- SHAKE ONBOARDING TOAST -->
+    <div class="shake-toast" id="shakeToast">
+        <span>🇻🇳 Bí mật nhỏ: lắc điện thoại để về trang chủ!</span>
+        <button onclick="dismissShakeOnboarding()">Đã hiểu</button>
     </div>
 
     <script>
@@ -1896,6 +1968,90 @@
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 2800);
         }
+        // ── SHAKE TO REVEAL FLAG (game → index, CHỈ Ở MÀN ĐĂNG KÝ) ──
+        (function () {
+            const SHAKE_THRESHOLD = 18;
+            const SHAKE_COOLDOWN = 4000;
+            let lastX, lastY, lastZ, lastShakeTime = 0, listening = false;
+
+            function handleMotion(e) {
+                const acc = e.accelerationIncludingGravity;
+                if (!acc) return;
+                const { x, y, z } = acc;
+                if (lastX === undefined) { lastX = x; lastY = y; lastZ = z; return; }
+                const delta = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
+                lastX = x; lastY = y; lastZ = z;
+                const now = Date.now();
+                if (delta > SHAKE_THRESHOLD && now - lastShakeTime > SHAKE_COOLDOWN) {
+                    lastShakeTime = now;
+                    onShakeDetected();
+                }
+            }
+
+            function startListening() {
+                if (listening) return;
+                listening = true;
+                window.addEventListener('devicemotion', handleMotion);
+            }
+
+            window.requestMotionPermission = function () {
+                if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+                    DeviceMotionEvent.requestPermission().then(state => {
+                        if (state === 'granted') startListening();
+                    }).catch(() => { });
+                } else {
+                    startListening();
+                }
+            };
+        })();
+
+        function onShakeDetected() {
+            // Chỉ kích hoạt khi đang ở màn ĐĂNG KÝ — tuyệt đối không cho rời trang khi đang làm bài/xem kết quả
+            const regScreen = document.getElementById('screen-reg');
+            if (!regScreen || !regScreen.classList.contains('active')) return;
+            triggerFlagRain(2500, () => {
+                window.location.href = 'index.html';
+            });
+        }
+
+        function triggerFlagRain(durationMs, onDone) {
+            const overlay = document.getElementById('flagRainOverlay');
+            overlay.innerHTML = '';
+            overlay.classList.add('active');
+            const count = 60;
+            for (let i = 0; i < count; i++) {
+                const img = document.createElement('img');
+                img.src = 'image/demo.png'; // TODO: thay bằng ảnh cờ Việt Nam thật
+                img.className = 'flag-piece';
+                img.style.left = Math.random() * 100 + 'vw';
+                const size = 28 + Math.random() * 30;
+                img.style.width = size + 'px';
+                img.style.animationDuration = (1.8 + Math.random() * 1.6) + 's';
+                img.style.animationDelay = (Math.random() * 0.6) + 's';
+                overlay.appendChild(img);
+            }
+            setTimeout(() => {
+                overlay.classList.remove('active');
+                overlay.innerHTML = '';
+                if (onDone) onDone();
+            }, durationMs);
+        }
+
+        function dismissShakeOnboarding() {
+            document.getElementById('shakeToast').classList.remove('show');
+            localStorage.setItem('shakeFlagOnboarded', '1');
+            requestMotionPermission();
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (!localStorage.getItem('shakeFlagOnboarded')) {
+                    document.getElementById('shakeToast').classList.add('show');
+                } else {
+                    requestMotionPermission();
+                }
+            }, 1200);
+        });
     </script>
 </body>
 
