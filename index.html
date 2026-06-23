@@ -11,19 +11,27 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <style>
     :root {
-      --red: #10b981; /* Mint primary */
-      --red-dark: #047857; /* Mint dark */
-      --red-bright: #34d399; /* Mint bright */
-      --red-glow: rgba(16, 185, 129, 0.15); /* Mint glow */
+      --red: #10b981;
+      /* Mint primary */
+      --red-dark: #047857;
+      /* Mint dark */
+      --red-bright: #34d399;
+      /* Mint bright */
+      --red-glow: rgba(16, 185, 129, 0.15);
+      /* Mint glow */
       --white: #ffffff;
       --off-white: #f8fafc;
       --dark: #ffffff;
       --text-main: #0f172a;
       --text-muted: #475569;
-      --blue-medical: #0d9488; /* Ngọc lam / Teal */
-      --blue-medical-dark: #0f766e; /* Teal dark */
-      --blue-medical-light: #f0fdfa; /* Teal light / pastel white */
-      --blue-medical-glow: rgba(13, 148, 136, 0.2); /* Teal glow */
+      --blue-medical: #0d9488;
+      /* Ngọc lam / Teal */
+      --blue-medical-dark: #0f766e;
+      /* Teal dark */
+      --blue-medical-light: #f0fdfa;
+      /* Teal light / pastel white */
+      --blue-medical-glow: rgba(13, 148, 136, 0.2);
+      /* Teal glow */
       --glass: rgba(13, 148, 136, 0.03);
       --glass-border: rgba(13, 148, 136, 0.08);
       --silver: #64748b;
@@ -262,14 +270,41 @@
       padding-top: 80px;
     }
 
+    @media(max-width:520px) {
+      #hero {
+        min-height: auto;
+        /* bỏ ép 100vh để chứa đủ nội dung + stats-bar không bị tràn/che */
+        padding-bottom: 0px;
+      }
+    }
+
     .hero-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(13, 148, 136, .08) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(16, 185, 129, .05) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 80% 50%, rgba(13, 148, 136, .04) 0%, transparent 60%);
+      background-image:
+        radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.5) 100%),
+        url('image/hero_banner1.png');
+      background-size: 135% auto;
+      /* zoom vào để cắt bỏ viền/margin teal ngoài cùng */
+      background-position: 20% 48%;
+      /* lấy đúng vị trí ruy băng làm trọng tâm */
+      background-repeat: no-repeat;
+    }
+
+    @media (max-width: 768px) {
+      .hero-bg {
+        background-size: 260% auto;
+        /* zoom mạnh hơn để ruy băng luôn lấp đầy khung hẹp */
+        background-position: 28% 42%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-bg {
+        background-size: 280% auto;
+        background-position: 25% 40%;
+      }
     }
 
     .hero-particles {
@@ -297,7 +332,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 22px;
+      padding: 8px;
       border: 1px solid rgba(2, 132, 199, .2);
       border-radius: 50px;
       backdrop-filter: blur(12px);
@@ -320,6 +355,7 @@
     }
 
     @keyframes blink {
+
       0%,
       100% {
         opacity: 1;
@@ -341,7 +377,7 @@
       filter: drop-shadow(0 4px 15px rgba(230, 57, 70, 0.2));
       transition: transform 0.5s ease;
     }
-    
+
     .hero-ribbon-img:hover {
       transform: scale(1.08) rotate(5deg);
     }
@@ -363,7 +399,7 @@
       font-weight: 900;
       font-size: clamp(38px, 10vw, 96px);
       letter-spacing: -3px;
-      line-height: .9;
+      line-height: 1.19;
       color: var(--text-main);
       text-transform: uppercase;
       margin-bottom: 16px;
@@ -532,7 +568,41 @@
 
     @media(max-width:520px) {
       .hero-stats-bar {
-        display: none;
+        position: relative;
+        /* không absolute nữa, để nó nằm cuối hero, không che chữ */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 0;
+        padding: 16px 5vw;
+      }
+
+      .stat-item {
+        padding: 0 10px;
+        gap: 8px;
+      }
+
+      .stat-item:nth-child(2) {
+        border-right: none;
+      }
+
+      .stat-item:nth-child(odd) {
+        border-right: 1px solid var(--glass-border);
+      }
+
+      .stat-item:nth-child(even) {
+        border-right: none;
+      }
+
+      .stat-icon {
+        font-size: 20px;
+      }
+
+      .stat-num {
+        font-size: 17px;
+      }
+
+      .stat-lbl {
+        font-size: 9px;
+        letter-spacing: 1px;
       }
     }
 
@@ -552,7 +622,8 @@
 
     @media(max-width:520px) {
       .scroll-cue {
-        bottom: 24px;
+        display: none;
+        /* tránh chồng lên stats-bar khi stats-bar không còn absolute */
       }
     }
 
@@ -571,6 +642,7 @@
     }
 
     @keyframes bounceCue {
+
       0%,
       100% {
         transform: translateX(-50%) translateY(0)
@@ -890,7 +962,7 @@
     .t-card.safe .t-card-title {
       color: #10b981;
     }
-    
+
     .t-card.warning .t-card-title {
       color: #d97706;
     }
@@ -1011,20 +1083,61 @@
       position: relative;
     }
 
+    /* Khung chứa ảnh (Khung màu trắng bo góc lớn trong hình) */
+    .quote-img-wrap {
+      position: relative;
+      width: 180px;
+      /* Đặt chiều rộng cố định cho khung */
+      height: 180px;
+      /* Đặt chiều cao cố định bằng chiều rộng */
+      margin: 0 auto 30px;
+      /* Căn giữa khung và tạo khoảng cách với chữ bên dưới */
+      background: #ffffff;
+      /* Nền màu trắng */
+      border-radius: 24px;
+      /* Bo góc mềm mại cho khung */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      /* Đổ bóng nhẹ sang trọng */
+
+      display: flex;
+      /* Sử dụng Flexbox để căn giữa logo */
+      align-items: center;
+      /* Căn giữa logo theo chiều dọc */
+      justify-content: center;
+      /* Căn giữa logo theo chiều ngang */
+      overflow: hidden;
+      /* Giữ các thành phần không bị tràn ra ngoài */
+    }
+
+    /* Lớp nền gradient mờ phía sau logo */
     .quote-img-bg {
       position: absolute;
       inset: 0;
       background: linear-gradient(135deg, rgba(13, 148, 136, .08), rgba(16, 185, 129, .03));
+      z-index: 0;
     }
 
+    /* Định dạng cho các Slide sử dụng Emoji (🌍, 💊, 👨‍👩‍👧) */
     .quote-img-icon {
+      font-size: 64px;
+      /* Tăng kích thước Emoji cho vừa vặn */
       position: relative;
       z-index: 1;
+      line-height: 1;
     }
-    
+
+    /* Định dạng hiển thị chính xác cho FILE ẢNH LOGO (image/ubHIV.png) */
     .quote-ribbon-img {
-      width: 80px;
+      max-width: 75%;
+      /* Giới hạn logo chiếm tối đa 75% chiều rộng khung */
+      max-height: 75%;
+      /* Giới hạn logo chiếm tối đa 75% chiều cao khung */
+      width: auto;
+      /* Tự động tính theo tỷ lệ gốc */
       height: auto;
+      /* Tự động tính theo tỷ lệ gốc */
+      object-fit: contain;
+      /* Đảm bảo ảnh không bao giờ bị méo hoặc bị móp */
       position: relative;
       z-index: 1;
     }
@@ -1312,14 +1425,14 @@
     }
 
     .treatment-arv-img {
-      width: 120px;
+      width: 300px;
       height: auto;
       display: block;
       margin: 0 auto 16px;
       filter: drop-shadow(0 4px 15px rgba(2, 132, 199, 0.2));
       transition: transform 0.5s ease;
     }
-    
+
     .treatment-visual:hover .treatment-arv-img {
       transform: scale(1.08) rotate(-3deg);
     }
@@ -1457,6 +1570,7 @@
     }
 
     @keyframes ribbonPulse {
+
       0%,
       100% {
         transform: scale(1);
@@ -1692,11 +1806,13 @@
       gap: 30px;
       margin-top: 40px;
     }
+
     @media(max-width: 768px) {
       .review-grid {
         grid-template-columns: 1fr;
       }
     }
+
     .review-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -1707,10 +1823,12 @@
       display: flex;
       flex-direction: column;
     }
+
     .review-card:hover {
       border-color: rgba(2, 132, 199, 0.25);
       box-shadow: 0 15px 35px rgba(2, 132, 199, 0.08);
     }
+
     .review-q-num {
       font-size: 12px;
       font-weight: 800;
@@ -1719,6 +1837,7 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
+
     .review-q-text {
       font-size: 17px;
       font-weight: 800;
@@ -1726,12 +1845,14 @@
       line-height: 1.5;
       margin-bottom: 20px;
     }
+
     .review-options {
       display: flex;
       flex-direction: column;
       gap: 12px;
       margin-bottom: 16px;
     }
+
     .review-opt-btn {
       display: flex;
       align-items: center;
@@ -1748,12 +1869,14 @@
       color: #334155;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .review-opt-btn:hover:not(:disabled) {
       background: #f0f9ff;
       border-color: var(--blue-medical);
       color: var(--blue-medical-dark);
       transform: translateY(-2px);
     }
+
     .opt-letter {
       display: flex;
       align-items: center;
@@ -1768,37 +1891,40 @@
       transition: all 0.3s;
       flex-shrink: 0;
     }
+
     .review-opt-btn:hover:not(:disabled) .opt-letter {
       background: var(--blue-medical);
       color: #ffffff;
     }
-    
+
     /* Answer states: Correct (emerald/xanh ngọc) and Incorrect (red) */
     .review-opt-btn.correct {
       background: #ecfdf5 !important;
       border-color: #10b981 !important;
       color: #065f46 !important;
     }
+
     .review-opt-btn.correct .opt-letter {
       background: #10b981 !important;
       color: #ffffff !important;
     }
-    
+
     .review-opt-btn.incorrect {
       background: #fff5f5 !important;
       border-color: #ef4444 !important;
       color: #991b1b !important;
     }
+
     .review-opt-btn.incorrect .opt-letter {
       background: #ef4444 !important;
       color: #ffffff !important;
     }
-    
+
     .review-opt-btn:disabled {
       cursor: not-allowed;
       opacity: 0.75;
     }
-    
+
     /* Feedback styling */
     .review-feedback {
       margin-top: 15px;
@@ -1808,20 +1934,31 @@
       line-height: 1.6;
       animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     .review-feedback.correct-style {
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
       color: #166534;
     }
+
     .review-feedback.incorrect-style {
       background: #fff5f5;
       border: 1px solid #feb2b2;
       color: #c53030;
     }
+
     .feedback-status {
       font-weight: 800;
       font-size: 15px;
@@ -1830,9 +1967,11 @@
       align-items: center;
       gap: 8px;
     }
+
     .feedback-explanation {
       margin-bottom: 12px;
     }
+
     .review-reset-btn {
       padding: 8px 18px;
       background: #475569;
@@ -1846,12 +1985,153 @@
       cursor: pointer;
       transition: all 0.3s;
     }
+
     .review-reset-btn:hover {
       background: #0f172a;
       transform: translateY(-1px);
     }
+
     .hidden {
       display: none !important;
+    }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1100;
+      padding: 0;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 100%;
+      height: 2.5px;
+      background: var(--text-main);
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    .nav-burger.open span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+
+    .nav-burger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-burger.open span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      .nav-burger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        max-width: 320px;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 100px 30px 40px;
+        gap: 26px;
+        transition: right .4s cubic-bezier(.4, 0, .2, 1);
+        box-shadow: -10px 0 40px rgba(15, 23, 42, .12);
+        z-index: 1050;
+      }
+
+      .nav-links.open {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 14px;
+        letter-spacing: 1.5px;
+      }
+
+      .nav-links .nav-cta {
+        margin-top: 10px;
+      }
+    }
+
+    /* ── FLAG RAIN EFFECT (hiệu ứng rung lắc) ── */
+    .flag-rain-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .flag-rain-overlay.active {
+      opacity: 1;
+    }
+
+    .flag-piece {
+      position: absolute;
+      top: -60px;
+      width: 36px;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .25));
+      animation: flagFall linear forwards;
+    }
+
+    @keyframes flagFall {
+      to {
+        transform: translateY(115vh) rotate(360deg);
+      }
+    }
+
+    /* ── SHAKE ONBOARDING TOAST ── */
+    .shake-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translate(-50%, 130%);
+      z-index: 100000;
+      background: #0f172a;
+      color: #fff;
+      padding: 14px 16px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      max-width: 92vw;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+      transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .shake-toast.show {
+      transform: translate(-50%, 0);
+    }
+
+    .shake-toast button {
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
     }
   </style>
 </head>
@@ -1878,9 +2158,9 @@
   <nav id="nav">
     <div class="nav-brand">
       <img src="image/hiv_icon.png" class="nav-ribbon-img" alt="Ribbon icon" />
-      <span class="nav-title">HIV/AIDS — HIỂU ĐỂ BẢO VỆ</span>
+      <span class="nav-title">HIV/AIDS MINIGAME</span>
     </div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#about">Tổng quan</a>
       <a href="#transmission">Lây truyền</a>
       <a href="#prevention">Phòng ngừa</a>
@@ -1888,7 +2168,11 @@
       <a href="#review-quiz">Ôn tập</a>
       <a href="#cta" class="nav-cta">Thi ngay →</a>
     </div>
+    <button class="nav-burger" id="navBurger" aria-label="Mở menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
 
   <!-- ══════════════════════════════════════════════ -->
   <!--  HERO                                         -->
@@ -1900,9 +2184,8 @@
     <div class="hero-content">
       <div class="hero-eyebrow">
         <span class="hero-eyebrow-dot"></span>
-        Phường Xuân Hương · Đà Lạt · 2026
+        Phường Xuân Hương - Đà Lạt
       </div>
-      <img src="image/hiv_icon.png" class="hero-ribbon-img" alt="Ribbon icon" />
       <h1 class="hero-title">Hiểu Để<br /><span>Bảo Vệ</span></h1>
       <div class="hero-subtitle">Phòng chống HIV/AIDS · Chống kỳ thị</div>
       <p class="hero-lead">
@@ -2055,7 +2338,8 @@
       <div class="transmission-header" data-aos="fade-up">
         <span class="sec-label">Con đường lây truyền</span>
         <h2 class="sec-title">HIV lây và <span>không lây</span><br />qua đâu?</h2>
-        <p class="sec-sub">Hiểu đúng để không hoang mang, không kỳ thị. HIV chỉ lây qua 3 con đường xác định — không phải qua sinh hoạt hàng ngày.</p>
+        <p class="sec-sub">Hiểu đúng để không hoang mang, không kỳ thị. HIV chỉ lây qua 3 con đường xác định — không
+          phải qua sinh hoạt hàng ngày.</p>
         <div class="sec-divider"></div>
       </div>
       <div class="t-grid">
@@ -2110,7 +2394,7 @@
       <div class="quote-slide active" data-idx="0">
         <div class="quote-img-wrap">
           <div class="quote-img-bg"></div>
-          <span class="quote-img-icon">🩺</span>
+          <img src="image/VAAC.png" class="quote-ribbon-img" alt="Ribbon icon" />
         </div>
         <div class="quote-body">
           <div class="quote-text">"Người nhiễm HIV không phải là tội nhân. Họ là những con người cần được chăm sóc, tôn
@@ -2123,7 +2407,7 @@
       <div class="quote-slide" data-idx="1">
         <div class="quote-img-wrap">
           <div class="quote-img-bg"></div>
-          <span class="quote-img-icon">🌍</span>
+          <img src="image/UNAIDS.png" class="quote-ribbon-img" alt="Ribbon icon" />
         </div>
         <div class="quote-body">
           <div class="quote-text">"Chúng ta không thể kết thúc AIDS mà không kết thúc sự kỳ thị. Sự kỳ thị là rào cản
@@ -2136,7 +2420,7 @@
       <div class="quote-slide" data-idx="2">
         <div class="quote-img-wrap">
           <div class="quote-img-bg"></div>
-          <span class="quote-img-icon">💊</span>
+          <img src="image/WHO.png" class="quote-ribbon-img" alt="Ribbon icon" />
         </div>
         <div class="quote-body">
           <div class="quote-text">"Điều trị ARV đúng phác đồ không chỉ kéo dài tuổi thọ — nó cho phép người nhiễm HIV
@@ -2149,7 +2433,7 @@
       <div class="quote-slide" data-idx="3">
         <div class="quote-img-wrap">
           <div class="quote-img-bg"></div>
-          <img src="image/hiv_icon.png" class="quote-ribbon-img" alt="Ribbon icon" />
+          <img src="image/VAAC.png" class="quote-ribbon-img" alt="Ribbon icon" />
         </div>
         <div class="quote-body">
           <div class="quote-text">"Xét nghiệm HIV sớm là hành động dũng cảm và có trách nhiệm với bản thân và người
@@ -2162,7 +2446,7 @@
       <div class="quote-slide" data-idx="4">
         <div class="quote-img-wrap">
           <div class="quote-img-bg"></div>
-          <span class="quote-img-icon">👨‍👩‍👧</span>
+          <img src="image/BYTVN.png" class="quote-ribbon-img" alt="Ribbon icon" />
         </div>
         <div class="quote-body">
           <div class="quote-text">"Một đứa trẻ sinh ra từ người mẹ nhiễm HIV có thể hoàn toàn không nhiễm HIV nếu người
@@ -2270,7 +2554,7 @@
       </div>
       <div class="treatment-grid" data-aos="fade-up" data-aos-delay="100">
         <div class="treatment-visual">
-          <img src="image/ARV.png" class="treatment-arv-img" alt="ARV Medicine" />
+          <img src="image/acriptega-arv-Photoroom.png" class="treatment-arv-img" alt="ARV Medicine" />
           <h3>ARV — Thuốc Kháng Retrovirus</h3>
           <p>Phác đồ điều trị bằng thuốc ARV (Antiretroviral) kiểm soát sự nhân lên của HIV trong cơ thể, giúp hệ miễn
             dịch phục hồi và duy trì sức khỏe.</p>
@@ -2330,7 +2614,8 @@
       <div style="text-align:center;margin-bottom:60px;" data-aos="fade-up">
         <span class="sec-label">Góc Học Tập</span>
         <h2 class="sec-title">Góc Kiến Thức <span>Ôn Tập</span></h2>
-        <p class="sec-sub" style="margin:14px auto 0;">Hãy tự kiểm tra kiến thức của mình qua 4 câu hỏi thực tế dưới đây để tự tin bước vào cuộc thi chính thức.</p>
+        <p class="sec-sub" style="margin:14px auto 0;">Hãy tự kiểm tra kiến thức của mình qua 4 câu hỏi thực tế dưới đây
+          để tự tin bước vào cuộc thi chính thức.</p>
         <div class="sec-divider" style="margin:18px auto 0;"></div>
       </div>
 
@@ -2360,7 +2645,9 @@
           <div class="review-feedback hidden">
             <div class="feedback-status"></div>
             <div class="feedback-explanation">
-              <strong>Giải thích khoa học:</strong> HIV là viết tắt của <em>Human Immunodeficiency Virus</em>. Đây là loại vi rút đặc hiệu gây suy giảm miễn dịch ở con người bằng cách tấn công các tế bào bạch cầu CD4, làm cơ thể suy yếu và dễ mắc các bệnh nhiễm trùng cơ hội.
+              <strong>Giải thích khoa học:</strong> HIV là viết tắt của <em>Human Immunodeficiency Virus</em>. Đây là
+              loại vi rút đặc hiệu gây suy giảm miễn dịch ở con người bằng cách tấn công các tế bào bạch cầu CD4, làm cơ
+              thể suy yếu và dễ mắc các bệnh nhiễm trùng cơ hội.
             </div>
             <button class="review-reset-btn">Làm lại</button>
           </div>
@@ -2391,7 +2678,9 @@
           <div class="review-feedback hidden">
             <div class="feedback-status"></div>
             <div class="feedback-explanation">
-              <strong>Giải thích khoa học:</strong> HIV không lây qua muỗi đốt vì vi rút không thể sống sót hay nhân lên trong hệ tiêu hóa của muỗi. Hơn nữa, lượng máu khi muỗi đốt là cực kỳ nhỏ và không được bơm ngược lại cơ thể người tiếp theo.
+              <strong>Giải thích khoa học:</strong> HIV không lây qua muỗi đốt vì vi rút không thể sống sót hay nhân lên
+              trong hệ tiêu hóa của muỗi. Hơn nữa, lượng máu khi muỗi đốt là cực kỳ nhỏ và không được bơm ngược lại cơ
+              thể người tiếp theo.
             </div>
             <button class="review-reset-btn">Làm lại</button>
           </div>
@@ -2422,7 +2711,9 @@
           <div class="review-feedback hidden">
             <div class="feedback-status"></div>
             <div class="feedback-explanation">
-              <strong>Giải thích khoa học:</strong> Ma túy đá tác động trực tiếp và cực mạnh lên não bộ, kích thích giải phóng ồ ạt dopamine tạo cảm giác hưng phấn giả tạo. Nó tàn phá các tế bào thần kinh, gây ra các ảo giác, hoang tưởng cực kỳ nguy hiểm (ngáo đá).
+              <strong>Giải thích khoa học:</strong> Ma túy đá tác động trực tiếp và cực mạnh lên não bộ, kích thích giải
+              phóng ồ ạt dopamine tạo cảm giác hưng phấn giả tạo. Nó tàn phá các tế bào thần kinh, gây ra các ảo giác,
+              hoang tưởng cực kỳ nguy hiểm (ngáo đá).
             </div>
             <button class="review-reset-btn">Làm lại</button>
           </div>
@@ -2453,7 +2744,9 @@
           <div class="review-feedback hidden">
             <div class="feedback-status"></div>
             <div class="feedback-explanation">
-              <strong>Giải thích khoa học:</strong> Khi sử dụng ma túy quá liều, các chất độc sẽ ức chế trung khu hô hấp và tim mạch ở não bộ, gây ngừng thở, suy tim cấp, khiến người dùng nhanh chóng rơi vào hôn mê sâu và tử vong nếu không được cấp cứu khẩn cấp.
+              <strong>Giải thích khoa học:</strong> Khi sử dụng ma túy quá liều, các chất độc sẽ ức chế trung khu hô hấp
+              và tim mạch ở não bộ, gây ngừng thở, suy tim cấp, khiến người dùng nhanh chóng rơi vào hôn mê sâu và tử
+              vong nếu không được cấp cứu khẩn cấp.
             </div>
             <button class="review-reset-btn">Làm lại</button>
           </div>
@@ -2466,7 +2759,8 @@
     <div class="cta-inner" data-aos="zoom-in">
       <img src="image/hiv_icon.png" class="cta-ribbon-img" alt="Ribbon icon" />
       <h2 class="cta-title">Kiểm tra kiến thức của bạn</h2>
-      <p class="cta-desc">Bạn đã hiểu đúng về HIV/AIDS chưa? Tham gia trò chơi trắc nghiệm của Phường Xuân Hương để kiểm tra kiến thức, nhận điểm số và góp phần tuyên truyền cộng đồng!</p>
+      <p class="cta-desc">Bạn đã hiểu đúng về HIV/AIDS chưa? Tham gia trò chơi trắc nghiệm của Phường Xuân Hương để kiểm
+        tra kiến thức, nhận điểm số và góp phần tuyên truyền cộng đồng!</p>
       <div class="cta-actions">
         <a href="game.html" class="btn-white">🏆 Thi trắc nghiệm ngay</a>
         <a href="tel:18000019" class="btn-outline-white">📞 Đường dây hỗ trợ</a>
@@ -2480,7 +2774,7 @@
   <footer>
     <img src="image/hiv_icon.png" class="footer-ribbon-img" alt="Ribbon icon" />
     <div class="footer-name">PHÒNG CHỐNG HIV/AIDS</div>
-    <div class="footer-org">Phường Xuân Hương · Đà Lạt · Lâm Đồng</div>
+    <div class="footer-org">Phường Xuân Hương - Đà Lạt</div>
     <div class="footer-links">
       <a href="#hero">Trang chủ</a>
       <a href="#about">Tổng quan</a>
@@ -2499,7 +2793,14 @@
     <span class="hotline-dot"></span>
     📞 Hỗ trợ: 1800 0019
   </a>
+  <!-- FLAG RAIN OVERLAY -->
+  <div class="flag-rain-overlay" id="flagRainOverlay"></div>
 
+  <!-- SHAKE ONBOARDING TOAST -->
+  <div class="shake-toast" id="shakeToast">
+    <span>🇻🇳 Bí mật nhỏ: lắc điện thoại để xem hiệu ứng đặc biệt!</span>
+    <button onclick="dismissShakeOnboarding()">Đã hiểu</button>
+  </div>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     // ── PRELOADER ──
@@ -2583,7 +2884,7 @@
           options.forEach(o => o.disabled = true);
 
           const isCorrect = btn.getAttribute('data-correct') === 'true';
-          
+
           if (isCorrect) {
             btn.classList.add('correct');
             feedback.className = 'review-feedback correct-style';
@@ -2615,6 +2916,103 @@
 
     // ── AOS INIT ──
     AOS.init({ duration: 900, once: true, offset: 80 });
+    // ── HAMBURGER NAV ──
+    const navBurger = document.getElementById('navBurger');
+    const navLinksEl = document.getElementById('navLinks');
+
+    navBurger.addEventListener('click', () => {
+      const isOpen = navLinksEl.classList.toggle('open');
+      navBurger.classList.toggle('open', isOpen);
+      navBurger.setAttribute('aria-expanded', isOpen);
+    });
+
+    navLinksEl.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinksEl.classList.remove('open');
+        navBurger.classList.remove('open');
+      });
+    });
+    // ── SHAKE TO REVEAL FLAG (index → game) ──
+    (function () {
+      const SHAKE_THRESHOLD = 18;   // độ nhạy — tăng nếu bị kích hoạt nhầm, giảm nếu khó kích hoạt
+      const SHAKE_COOLDOWN = 4000;  // ms, tránh kích hoạt liên tục
+      let lastX, lastY, lastZ, lastShakeTime = 0, listening = false;
+
+      function handleMotion(e) {
+        const acc = e.accelerationIncludingGravity;
+        if (!acc) return;
+        const { x, y, z } = acc;
+        if (lastX === undefined) { lastX = x; lastY = y; lastZ = z; return; }
+        const delta = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
+        lastX = x; lastY = y; lastZ = z;
+        const now = Date.now();
+        if (delta > SHAKE_THRESHOLD && now - lastShakeTime > SHAKE_COOLDOWN) {
+          lastShakeTime = now;
+          onShakeDetected();
+        }
+      }
+
+      function startListening() {
+        if (listening) return;
+        listening = true;
+        window.addEventListener('devicemotion', handleMotion);
+      }
+
+      window.requestMotionPermission = function () {
+        if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+          DeviceMotionEvent.requestPermission().then(state => {
+            if (state === 'granted') startListening();
+          }).catch(() => { });
+        } else {
+          startListening(); // Android: không cần xin quyền
+        }
+      };
+    })();
+
+    function onShakeDetected() {
+      triggerFlagRain(2500, () => {
+        window.location.href = 'game.html';
+      });
+    }
+
+    function triggerFlagRain(durationMs, onDone) {
+      const overlay = document.getElementById('flagRainOverlay');
+      overlay.innerHTML = '';
+      overlay.classList.add('active');
+      const count = 60;
+      for (let i = 0; i < count; i++) {
+        const img = document.createElement('img');
+        img.src = 'image/demo.png'; // TODO: thay bằng ảnh cờ Việt Nam thật
+        img.className = 'flag-piece';
+        img.style.left = Math.random() * 100 + 'vw';
+        const size = 28 + Math.random() * 30;
+        img.style.width = size + 'px';
+        img.style.animationDuration = (1.8 + Math.random() * 1.6) + 's';
+        img.style.animationDelay = (Math.random() * 0.6) + 's';
+        overlay.appendChild(img);
+      }
+      setTimeout(() => {
+        overlay.classList.remove('active');
+        overlay.innerHTML = '';
+        if (onDone) onDone();
+      }, durationMs);
+    }
+
+    function dismissShakeOnboarding() {
+      document.getElementById('shakeToast').classList.remove('show');
+      localStorage.setItem('shakeFlagOnboarded', '1');
+      requestMotionPermission();
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!localStorage.getItem('shakeFlagOnboarded')) {
+          document.getElementById('shakeToast').classList.add('show');
+        } else {
+          requestMotionPermission();
+        }
+      }, 2500); // chờ preloader chạy xong rồi mới hiện toast
+    });
   </script>
 </body>
 
